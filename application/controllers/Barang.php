@@ -78,7 +78,7 @@ class Barang extends CI_Controller
             $this->load->view('barang/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->Barang_model->updateBarang();
+            $this->Barang_model->update_barang();
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Barang Berhasil diubah!</div>');
             redirect('barang');
         }

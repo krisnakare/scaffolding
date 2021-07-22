@@ -35,15 +35,15 @@
                     <?php foreach ($barang as $b) : ?>
                         <tr>
                             <th scope="row"><?= $i++; ?></th>
-                            <td><?= $p->nama_barang ?></td>
-                            <td><?= $p->jenis_barang ?></td>
-                            <td><?= $p->stok ?></td>
-                            <td><?= $p->harga_sewa ?></td>
-                            <td><?= $p->harga_barang ?></td>
+                            <td><?= $b->nama_barang ?></td>
+                            <td><?= $b->jenis_barang ?></td>
+                            <td><?= $b->stok ?></td>
+                            <td><?= $b->harga_sewa ?></td>
+                            <td><?= $b->harga_barang ?></td>
                                 <td>
-                                    <a href="<?= base_url('barang/update_barang/') . $p->id_barang ?>" class="badge badge-warning">edit</a>
-                                    <a href="<?= base_url('barang/hapus_barang/') . $p->id_barang ?>" class="badge badge-danger">delete</a>
-                                </td>
+                                    <a href="<?= base_url('barang/update_barang/') . $b->id_barang ?>" class="badge badge-warning">edit</a>
+                                    <a href="<?= base_url('barang/hapus_barang/') . $b->id_barang ?>" class="badge badge-danger">delete</a>
+                            </tb>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
