@@ -31,7 +31,7 @@ class Barang_model extends CI_Model
             'nama_barang' => $nama_barang,
             'jenis_barang' => $jenis_barang,
             'stok' => $stok,
-            'hagra_sewa' => $hagra_sewa,
+            'harga_sewa' => $harga_sewa,
             'harga_barang' => $harga_barang
         ];
 

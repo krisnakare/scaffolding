@@ -1,6 +1,6 @@
-<form action="<?= base_url('Barang/update_barang'); ?>" method="post">
+<form action="" method="post">
                     <div class="modal-body">
-                        <input type="hidden" value="<?= (set_value('id_barang')) ? set_value('id_barang') : $barang['id_barang']; ?>">
+                        <input type="text" name="id_barang" value="<?= (set_value('id_barang')) ? set_value('id_barang') : $barang['id_barang']; ?>">
                         <div class="form-group">
                             <input type="text" class="form-control" id="nama_barang" name="nama_barang" placeholder="Nama barang" value="<?= (set_value('nama_barang')) ? set_value('nama_barang') : $barang['nama_barang']; ?>">
                         </div>
