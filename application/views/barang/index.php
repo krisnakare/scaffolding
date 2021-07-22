@@ -10,11 +10,8 @@
             <?php endif; ?>
 
             <?php $this->session->flashdata('message'); ?>
-
-            <?php if ($user['role_id'] == 1) : ?>
-                <a href="#" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newPsikologModal">Add New Psikolog</a>
-            <?php endif; ?>
-
+ 
+            <a href="#" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newBarang">Add Barang Baru</a>
 
             <nav aria-label="Page navigation">
                 <ul class="pagination">
@@ -25,28 +22,28 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Nama</th>
-                        <th scope="col">No Telp</th>
-                        <th scope="col">Alamat</th>
-                        <?php if ($user['role_id'] == 1) : ?>
+                        <th scope="col">nama_barang</th>
+                        <th scope="col">jenis_barang</th>
+                        <th scope="col">stok</th>
+                        <th scope="col">harga_sewa</th>
+                        <th scope="col">harga_barang</th>
                             <th scope="col">Action</th>
-                        <?php endif; ?>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $i = $this->uri->segment('3') + 1; ?>
-                    <?php foreach ($psikolog as $p) : ?>
+                    <?php foreach ($barang as $b) : ?>
                         <tr>
                             <th scope="row"><?= $i++; ?></th>
-                            <td><?= $p->nama_psikolog ?></td>
-                            <td><?= $p->notelp_psikolog ?></td>
-                            <td><?= $p->alamat_psikolog ?></td>
-                            <?php if ($user['role_id'] == 1) : ?>
+                            <td><?= $p->nama_barang ?></td>
+                            <td><?= $p->jenis_barang ?></td>
+                            <td><?= $p->stok ?></td>
+                            <td><?= $p->harga_sewa ?></td>
+                            <td><?= $p->harga_barang ?></td>
                                 <td>
-                                    <a href="<?= base_url('psikolog/edit/') . $p->id_psikolog ?>" class="badge badge-warning">edit</a>
-                                    <a href="<?= base_url('psikolog/deletepsikolog/') . $p->id_psikolog ?>" class="badge badge-danger">delete</a>
+                                    <a href="<?= base_url('barang/update_barang/') . $p->id_barang ?>" class="badge badge-warning">edit</a>
+                                    <a href="<?= base_url('barang/hapus_barang/') . $p->id_barang ?>" class="badge badge-danger">delete</a>
                                 </td>
-                            <?php endif; ?>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -57,25 +54,31 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="newPsikologModal" tabindex="-1" aria-labelledby="newPsikologModalLabel" aria-hidden="true">
+    <div class="modal fade" id="newBarang" tabindex="-1" aria-labelledby="newBarang" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="newPsikologModalLabel">Add New Psikolog</h5>
+                    <h5 class="modal-title" id="newBarang">Add New Barang</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="<?= base_url('psikolog/addpsikolog'); ?>" method="post">
+                <form action="<?= base_url('Barang/tambah_barang'); ?>" method="post">
                     <div class="modal-body">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="nama_psikolog" name="nama_psikolog" placeholder="Nama Psikolog">
+                            <input type="text" class="form-control" id="nama_barang" name="nama_barang" placeholder="Nama barang">
                         </div>
                         <div class="form-group">
-                            <input type="number" class="form-control" id="notelp_psikolog" name="notelp_psikolog" placeholder="Nomor Telepon Psikolog">
+                            <input type="text" class="form-control" id="jenis_barang" name="jenis_barang" placeholder="Jenis Barang">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="alamat_psikolog" name="alamat_psikolog" placeholder="Alamat Psikolog">
+                            <input type="number" class="form-control" id="stok" name="stok" placeholder="stok">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="harga_sewa" name="harga_sewa" placeholder="Harga Sewa">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="harga_barang" name="harga_barang" placeholder="Harga Barang">
                         </div>
                     </div>
                     <div class="modal-footer">

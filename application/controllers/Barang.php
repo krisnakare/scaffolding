@@ -28,63 +28,44 @@ class Barang extends CI_Controller
 
     public function tambah_barang()
     {
-        $nama_psikolog = htmlspecialchars($this->input->post('nama_barang'));
-        $notelp_psikolog = htmlspecialchars($this->input->post('jenis_barang'));
-        $alamat_psikolog = htmlspecialchars($this->input->post('stok'));
-        $alamat_psikolog = htmlspecialchars($this->input->post('stok'));
+        $nama_barang = htmlspecialchars($this->input->post('nama_barang'));
+        $jenis_barang = htmlspecialchars($this->input->post('jenis_barang'));
+        $stok = htmlspecialchars($this->input->post('stok'));
+        $harga_sewa = htmlspecialchars($this->input->post('harga_sewa'));
+        $harga_barang = htmlspecialchars($this->input->post('harga_barang'));
 
         $data = array(
-            'nama_psikolog' => $nama_psikolog,
-            'notelp_psikolog' => $notelp_psikolog,
-            'alamat_psikolog' => $alamat_psikolog
+            'nama_barang' => $nama_barang,
+            'jenis_barang' => $jenis_barang,
+            'stok' => $stok,
+            'harga_sewa' => $harga_sewa,
+            'harga_barang' => $harga_barang
         );
 
-        $this->db->insert('psikolog', $data);
+        $this->db->insert('barang', $data);
 
-        redirect('psikolog');
+        redirect('barang');
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        New Psikolog has been added!</div>');
+        New Item has been added!</div>');
     }
 
-    public function deletePsikolog($id_psikolog)
+    public function hapus_barang($id_barang)
     {
-        $this->Psikolog_model->delete($id_psikolog);
-        redirect('psikolog');
+        $this->Barang_model->delete($id_barang);
+        redirect('barang');
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        Psikolog has been deleted!</div>');
+        Barang has been deleted!</div>');
     }
 
-    public function addJadwal()
+    public function update_barang()
     {
-        $data['title'] = 'Buat Jadwal Konsultasi';
-        $data['user'] = $this->User_model->user();
-        $data['maxPs'] = $this->Psikolog_model->jumlah_psikolog();
-
-        $this->form_validation->set_rules('popsize', 'Population size', 'required');
-        $this->form_validation->set_rules('cr', 'Crossover rate', 'required|decimal');
-        $this->form_validation->set_rules('mr', 'Mutation rate', 'required|decimal');
-        $this->form_validation->set_rules('iterasi', 'Iterasi', 'required',);
-        $this->form_validation->set_rules('thresholdSaget', 'Threshold', 'required|decimal');
-
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('jadwal/index', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $popsize = (int)$this->input->post('popsize');
-            $cr = (float)$this->input->post('cr');
-            $mr = (float)$this->input->post('mr');
-            $iterasi = (int)$this->input->post('iterasi');
-            $thresholdSaget = (float)$this->input->post('thresholdSaget');
-            $maxPs = (int)$this->Psikolog_model->jumlah_psikolog();
-
-
-            // $this->algoritma->run($popsize, $cr, $mr, $iterasi, $thresholdSaget, $maxPs);
-        }
+        $this->Barang_model->subMenuedit();
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+        Barang Edited!</div>');
+        redirect('barang');
     }
+
 
     private function pagination()
     {
@@ -107,11 +88,11 @@ class Barang extends CI_Controller
         $config['first_tagl_close'] = '</span></li>';
         $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
         $config['last_tagl_close']  = '</span></li>';
-        $config['base_url'] = base_url() . 'psikolog/index';
-        $config['total_rows'] = $this->db->count_all('psikolog');
+        $config['base_url'] = base_url() . 'barang/index';
+        $config['total_rows'] = $this->db->count_all('barang');
         $config['per_page'] = 5;
         $from = $this->uri->segment(3);
         $this->pagination->initialize($config);
-        return $this->Psikolog_model->data($config['per_page'], $from);
+        return $this->Barang_model->data($config['per_page'], $from);
     }
 }

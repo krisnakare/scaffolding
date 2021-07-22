@@ -23,7 +23,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/penjadwalan_konsultasi/';
+$config['base_url'] = 'http://localhost/scaffolding/';
 // Ingat diganti jika masuk hostingan
 
 /*
