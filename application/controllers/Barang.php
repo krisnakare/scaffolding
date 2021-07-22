@@ -21,7 +21,7 @@ class Barang extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('psikolog/index', $data);
+        $this->load->view('barang/index', $data);
         $this->load->view('templates/footer');
     }
 
@@ -51,19 +51,37 @@ class Barang extends CI_Controller
 
     public function hapus_barang($id_barang)
     {
-        $this->Barang_model->delete($id_barang);
+        $this->Barang_model->hapus_barang($id_barang);
         redirect('barang');
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
         Barang has been deleted!</div>');
     }
 
-    public function update_barang()
+    public function update_barang($id)
     {
-        $this->Barang_model->subMenuedit();
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        Barang Edited!</div>');
-        redirect('barang');
+        $this->form_validation->set_rules('nama_barang', 'Nama barang', 'required');
+        $this->form_validation->set_rules('jenis_barang', 'jenis_barang', 'required');
+        $this->form_validation->set_rules('stok', 'stok', 'required');
+        $this->form_validation->set_rules('harga_sewa', 'harga_sewa', 'required');
+        $this->form_validation->set_rules('harga_barang', 'harga_barang', 'required');
+        if ($this->form_validation->run() == false) {
+            $data['title'] = "Edit Data Barang";
+            $data['user'] = $this->User_model->user();
+            $data['barang'] = $this->Barang_model->getBarangById($id);
+
+            //$data['barang'] = $this->Barang_model->getJurusan();
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar');
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('barang/edit', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->Barang_model->updateBarang();
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Barang Berhasil diubah!</div>');
+            redirect('barang');
+        }
     }
 
 
@@ -90,7 +108,7 @@ class Barang extends CI_Controller
         $config['last_tagl_close']  = '</span></li>';
         $config['base_url'] = base_url() . 'barang/index';
         $config['total_rows'] = $this->db->count_all('barang');
-        $config['per_page'] = 5;
+        $config['per_page'] = 10;
         $from = $this->uri->segment(3);
         $this->pagination->initialize($config);
         return $this->Barang_model->data($config['per_page'], $from);
