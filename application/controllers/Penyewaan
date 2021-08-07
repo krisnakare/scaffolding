@@ -48,10 +48,10 @@ class Penyewaan extends CI_Controller
         New Item has been added!</div>');
     }
 
-    public function hapus_barang($id_barang)
+    public function hapus_barang($id_sewa)
     {
-        $this->Barang_model->hapus_barang($id_barang);
-        redirect('barang');
+        $this->Barang_model->hapus_barang($id_sewa);
+        redirect('penyewaan');
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
         Barang has been deleted!</div>');
@@ -63,7 +63,6 @@ class Penyewaan extends CI_Controller
         $this->form_validation->set_rules('jenis_barang', 'jenis_barang', 'required');
         $this->form_validation->set_rules('stok', 'stok', 'required');
         $this->form_validation->set_rules('harga_sewa', 'harga_sewa', 'required');
-        $this->form_validation->set_rules('harga_barang', 'harga_barang', 'required');
         if ($this->form_validation->run() == false) {
             $data['title'] = "Edit Data Barang";
             $data['user'] = $this->User_model->user();
