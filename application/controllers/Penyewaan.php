@@ -7,8 +7,8 @@ class Penyewaan extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
-        $this->load->model('penyewaan_model');
-        
+        $this->load->model('Penyewaan_model');
+        // $this->form_validation();
     }
 
     public function index()
@@ -26,60 +26,62 @@ class Penyewaan extends CI_Controller
     }
 
 
-    public function tambah_barang()
+    public function tambah_sewa()
     {
-        $nama_penyewa = htmlspecialchars($this->input->post('nama_penyewa'));
-        $tgl_sewa = htmlspecialchars($this->input->post('tgl_sewa'));
-        $lama_sewa = htmlspecialchars($this->input->post('lama_sewa'));
-        $status = htmlspecialchars($this->input->post('status'));
-
-        $data = array(
-            'nama_penyewa' => $nama_penyewa,
-            'tgl_sewa' => $tgl_sewa,
-            'lama_sewa' => $lama_sewa,
-            'status' => $status
-            
-        );
-
-        $this->db->insert('tabel_sewa', $data);
-
-        redirect('penyewaan');
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        New Item has been added!</div>');
-    }
-
-    public function hapus_barang($id_sewa)
-    {
-        $this->Barang_model->hapus_barang($id_sewa);
-        redirect('penyewaan');
-
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        Barang has been deleted!</div>');
-    }
-
-    public function update_barang($id)
-    {
-        $this->form_validation->set_rules('nama_barang', 'Nama barang', 'required');
-        $this->form_validation->set_rules('jenis_barang', 'jenis_barang', 'required');
-        $this->form_validation->set_rules('stok', 'stok', 'required');
-        $this->form_validation->set_rules('harga_sewa', 'harga_sewa', 'required');
+        $this->form_validation->set_rules('nama_penyewa', 'Nama Penyewa', 'required');
         if ($this->form_validation->run() == false) {
-            $data['title'] = "Edit Data Barang";
+            $data['title'] = 'Tambah Data Sewa';
             $data['user'] = $this->User_model->user();
-            $data['barang'] = $this->Barang_model->getBarangById($id);
-
-            //$data['barang'] = $this->Barang_model->getJurusan();
 
             $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar');
+            $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
-            $this->load->view('barang/edit', $data);
+            $this->load->view('penyewaan/tambah', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->Barang_model->update_barang();
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Barang Berhasil diubah!</div>');
-            redirect('barang');
+            $nama_penyewa = htmlspecialchars($this->input->post('nama_penyewa'));
+            $tgl_sewa = htmlspecialchars($this->input->post('tgl_sewa'));
+            $lama_sewa = htmlspecialchars($this->input->post('lama_sewa'));
+            $status = "pinjam";
+    
+            $data = array(
+                'nama_penyewa' => $nama_penyewa,
+                'tgl_sewa' => $tgl_sewa,
+                'lama_sewa' => $lama_sewa,
+                'status' => $status
+                
+            );
+    
+            $this->db->insert('tabel_sewa', $data);
+    
+            redirect('penyewaan');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            New Item has been added!</div>');
         }
+      
+    }
+
+    public function tambah_keranjang($id_barang)
+    {
+        $barang = $this->db->get_where('barang', array('id_barang' => $id_barang));
+        $banyak_barang = intval($this->input->post('banyak_barang'));
+
+        $data = array(
+            'id_barang' => $barang->id_barang,
+            'banyak_barang' => $banyak_barang,
+            'total_biaya' => $barang->harga_sewa * $banyak_barang    
+        );
+
+        $this->cart->insert($data);
+    }
+
+    public function hapus_penyewaan($id_sewa)
+    {
+        $this->Penyewaan_model->hapus_penyewaan($id_sewa);
+        redirect('penyewaan');
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+        Data Penyewaan has been deleted!</div>');
     }
 
 
@@ -104,11 +106,11 @@ class Penyewaan extends CI_Controller
         $config['first_tagl_close'] = '</span></li>';
         $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
         $config['last_tagl_close']  = '</span></li>';
-        $config['base_url'] = base_url() . 'barang/index';
-        $config['total_rows'] = $this->db->count_all('barang');
+        $config['base_url'] = base_url() . 'penyewaan/index';
+        $config['total_rows'] = $this->db->count_all('tabel_sewa');
         $config['per_page'] = 10;
         $from = $this->uri->segment(3);
         $this->pagination->initialize($config);
-        return $this->Barang_model->data($config['per_page'], $from);
+        return $this->Penyewaan_model->data($config['per_page'], $from);
     }
 }
