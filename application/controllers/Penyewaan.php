@@ -8,7 +8,6 @@ class Penyewaan extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->load->model('Penyewaan_model');
-        // $this->form_validation();
     }
 
     public function index()
@@ -32,6 +31,7 @@ class Penyewaan extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Tambah Data Sewa';
             $data['user'] = $this->User_model->user();
+            $data['barang'] = $this->db->get('barang')->result();
 
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
@@ -43,36 +43,36 @@ class Penyewaan extends CI_Controller
             $tgl_sewa = htmlspecialchars($this->input->post('tgl_sewa'));
             $lama_sewa = htmlspecialchars($this->input->post('lama_sewa'));
             $status = "pinjam";
-    
+
             $data = array(
                 'nama_penyewa' => $nama_penyewa,
                 'tgl_sewa' => $tgl_sewa,
                 'lama_sewa' => $lama_sewa,
                 'status' => $status
-                
             );
-    
+
             $this->db->insert('tabel_sewa', $data);
-    
+
             redirect('penyewaan');
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
             New Item has been added!</div>');
         }
-      
     }
 
-    public function tambah_keranjang($id_barang)
+    public function tambah_keranjang()
     {
-        $barang = $this->db->get_where('barang', array('id_barang' => $id_barang));
+        $barang = $this->db->get_where('barang', $this->input->post('id_barang'));
         $banyak_barang = intval($this->input->post('banyak_barang'));
 
         $data = array(
             'id_barang' => $barang->id_barang,
             'banyak_barang' => $banyak_barang,
-            'total_biaya' => $barang->harga_sewa * $banyak_barang    
+            'total_biaya' => $barang->harga_sewa * $banyak_barang
         );
 
         $this->cart->insert($data);
+
+        redirect('penyewaan/tambah_sewa');
     }
 
     public function hapus_penyewaan($id_sewa)

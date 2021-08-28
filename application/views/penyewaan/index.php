@@ -10,8 +10,8 @@
             <?php endif; ?>
 
             <?php $this->session->flashdata('message'); ?>
- 
-            <a href="#" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newBarang">Add Barang Baru</a>
+
+            <a href="<?= base_url('penyewaan/tambah_sewa'); ?>" class="btn btn-primary mb-3">Add Barang Baru</a>
 
             <nav aria-label="Page navigation">
                 <ul class="pagination">
@@ -22,10 +22,10 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">nama_penyewa</th>
-                        <th scope="col">tgl_sewa</th>
-                        <th scope="col">lama_sewa</th>
-                            <th scope="col">Action</th>
+                        <th scope="col">Nama Penyewa</th>
+                        <th scope="col">Tgl Sewa</th>
+                        <th scope="col">Lama Sewa</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,16 +36,13 @@
                             <td><?= $p->nama_penyewa ?></td>
                             <td><?= $p->tgl_sewa ?></td>
                             <td><?= $p->lama_sewa ?></td>
-                                <td>
-                                    <a href="<?= base_url('penyewaan/hapus_penyewaan/') . $p->id_sewa ?>" class="badge badge-danger">delete</a>
-                            </tb>
+                            <td>
+                                <a href="<?= base_url('penyewaan/hapus_penyewaan/') . $p->id_sewa ?>" class="badge badge-danger">delete</a>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
             <br>
-
         </div>
     </div>
-
- 
