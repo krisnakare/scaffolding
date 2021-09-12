@@ -17,6 +17,15 @@
                 <i class="fas fa-sign-out-alt fa-fw"></i>
                 <span>Data Barang</span></a>
         </li>
+
+    <!-- Divider --> 
+    <hr class="sidebar-divider ">
+        <div class="sidebar-heading">Penyewaan</div>
+        <li class="nav-item">
+            <a class="nav-link" href="<?= base_url('penyewaan'); ?>">
+                <i class="fas fa-sign-out-alt fa-fw"></i>
+                <span>Tambah Penyewaan</span></a>
+        </li>
     <hr class="sidebar-divider ">
     <div class="sidebar-heading">User</div>
         <!-- Nav Item - Logout -->

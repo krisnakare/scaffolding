@@ -18,6 +18,11 @@ class Barang_model extends CI_Model
         return $this->db->query($query)->row_array();
     }
 
+    public function getBarang()
+    {
+        return $this->db->get('barang')->result();
+    }
+
     public function update_barang()
     {
         $id_barang = $this->input->post('id_barang');

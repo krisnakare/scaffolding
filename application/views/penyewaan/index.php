@@ -11,7 +11,7 @@
 
             <?php $this->session->flashdata('message'); ?>
  
-            <a href="#" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newBarang">Add Barang Baru</a>
+            <a href="#" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newPenyewaan">Add Penyewaan Baru</a>
 
             <nav aria-label="Page navigation">
                 <ul class="pagination">
@@ -23,21 +23,21 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">nama_penyewa</th>
-                        <th scope="col">tgl_sewa</th>
+                        <th scope="col">tanggal_sewa</th>
                         <th scope="col">lama_sewa</th>
                             <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $i = $this->uri->segment('3') + 1; ?>
-                    <?php foreach ($penyewaan as $p) : ?>
+                    <?php foreach ($penyewaan as $s) : ?>
                         <tr>
                             <th scope="row"><?= $i++; ?></th>
-                            <td><?= $p->nama_penyewa ?></td>
-                            <td><?= $p->tgl_sewa ?></td>
-                            <td><?= $p->lama_sewa ?></td>
+                            <td><?= $s->nama_penyewa ?></td>
+                            <td><?= $s->tgl_sewa ?></td>
+                            <td><?= $s->lama_sewa ?></td>
                                 <td>
-                                    <a href="<?= base_url('penyewaan/hapus_penyewaan/') . $p->id_sewa ?>" class="badge badge-danger">delete</a>
+                                    <a href="<?= base_url('penyewaan/hapus_barang/') . $s->id_sewa ?>" class="badge badge-danger">delete</a>
                             </tb>
                         </tr>
                     <?php endforeach; ?>
@@ -48,4 +48,30 @@
         </div>
     </div>
 
- 
+    <!-- Modal -->
+    <div class="modal fade" id="newPenywaan" tabindex="-1" aria-labelledby="newPenyewaan" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newPenyewaan">Add New penyewaan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="<?= base_url('penyewaan/tambah_barang'); ?>" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="nama_penyewa" name="nama_penyewa" placeholder="Nama Penyewa">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="tanggal_sewa" name="tanggal_sewa" placeholder="Tanggal Sewa">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
