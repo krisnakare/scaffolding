@@ -9,6 +9,11 @@ class Penyewaan_model extends CI_Model
         return $this->db->get('tabel_sewa', $number, $offset)->result();
     }
 
+    public function getPenyewaan()
+    {
+        return $this->db->get('tabel_sewa')->result();
+    }
+
     public function hapus_penyewaan($id_sewa)
     {
         $this->db->where('id_sewa', $id_sewa);
