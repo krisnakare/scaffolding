@@ -24,7 +24,7 @@
         <li class="nav-item">
             <a class="nav-link" href="<?= base_url('penyewaan'); ?>">
                 <i class="fas fa-sign-out-alt fa-fw"></i>
-                <span>Tambah Penyewaan</span></a>
+                <span>Penyewaan</span></a>
         </li>
     <hr class="sidebar-divider ">
     <div class="sidebar-heading">User</div>

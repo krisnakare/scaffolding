@@ -58,13 +58,16 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="<?= base_url('penyewaan/tambah_barang'); ?>" method="post">
+                <form action="<?= base_url('penyewaan/tambah_sewa'); ?>" method="post">
                     <div class="modal-body">
                         <div class="form-group">
                             <input type="text" class="form-control" id="nama_penyewa" name="nama_penyewa" placeholder="Nama Penyewa">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="tanggal_sewa" name="tanggal_sewa" placeholder="Tanggal Sewa">
+                            <input type="text" class="form-control" id="tgl_sewa" name="tgl_sewa" placeholder="Tanggal Sewa">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="lama_sewa" name="lama_sewa" placeholder="lama Sewa">
                         </div>
                     </div>
                     <div class="modal-footer">
