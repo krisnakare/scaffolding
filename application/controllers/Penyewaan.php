@@ -8,6 +8,8 @@ class Penyewaan extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->load->model('Penyewaan_model');
+        // $this->load->model('Barang_model');
+        // $this->form_validation();
     }
 
     public function index()
@@ -60,21 +62,33 @@ class Penyewaan extends CI_Controller
         }
     }
 
-    public function tambah_keranjang()
-    {
-        $barang = $this->db->get_where('barang', $this->input->post('id_barang'));
-        $banyak_barang = intval($this->input->post('banyak_barang'));
+    // public function tambah_keranjang()
+    // {
+    //     $id_barang = $this->input->post('id_barang');
+    //     $barang = $this->db->get_where('barang', array('id_barang' => $id_barang));
+    //     $banyak_barang = intval($this->input->post('banyak_barang'));
 
-        $data = array(
-            'id_barang' => $barang->id_barang,
-            'banyak_barang' => $banyak_barang,
-            'total_biaya' => $barang->harga_sewa * $banyak_barang
-        );
+    //     $data = array(
+    //         'id_barang' => $id_barang,
+    //         'banyak_barang' => $banyak_barang,
+    //         'total_biaya' => $barang->harga_sewa * $banyak_barang    
+    //     );
 
-        $this->cart->insert($data);
+    //     $this->cart->insert($data);
+    //     echo $this->show_cart();
+    // }
 
-        redirect('penyewaan/tambah_sewa');
-    }
+    // public function show_cart()
+    // {
+    //     $output = '';
+    //     $no = 0;
+    //     foreach ($this->cart->contents() as $items) {
+    //         $no++;
+    //         $output = '
+
+    //         ';
+    //     }
+    // }
 
     public function hapus_penyewaan($id_sewa)
     {
