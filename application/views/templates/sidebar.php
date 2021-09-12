@@ -11,23 +11,6 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider ">
-<<<<<<< HEAD
-        <div class="sidebar-heading">Barang</div>
-        <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('barang'); ?>">
-                <i class="fas fa-sign-out-alt fa-fw"></i>
-                <span>Data Barang</span></a>
-        </li>
-
-    <!-- Divider --> 
-    <hr class="sidebar-divider ">
-        <div class="sidebar-heading">Penyewaan</div>
-        <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('penyewaan'); ?>">
-                <i class="fas fa-sign-out-alt fa-fw"></i>
-                <span>Penyewaan</span></a>
-        </li>
-=======
     <div class="sidebar-heading">Barang</div>
     <li class="nav-item">
         <a class="nav-link" href="<?= base_url('barang'); ?>">
@@ -35,11 +18,10 @@
             <span>Data Barang</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('penyewaan'); ?>">
+        <a class="nav-link" href="<?= base_url('sewa'); ?>">
             <i class="fas fa-sign-out-alt fa-fw"></i>
             <span>Data Penyewaan</span></a>
     </li>
->>>>>>> 52fca6864215d18a753067763eb29a4a37151a6c
     <hr class="sidebar-divider ">
     <div class="sidebar-heading">User</div>
 
