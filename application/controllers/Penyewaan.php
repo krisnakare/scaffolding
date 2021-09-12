@@ -32,7 +32,7 @@ class Penyewaan extends CI_Controller
         $this->form_validation->set_rules('nama_penyewa', 'Nama Penyewa', 'required');
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Tambah Data Sewa';
-            $data['barang'] = $this->Barang_model->getBarang();
+            $data['penyewaan'] = $this->Penyewaan_model->get();
             $data['user'] = $this->User_model->user();
 
             // $this->load->view('templates/header', $data);
