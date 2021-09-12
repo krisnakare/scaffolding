@@ -9,8 +9,9 @@
         <div class="sidebar-brand-text mx-3">Penyewaan Scaffolding</div>
     </a>
 
-    <!-- Divider --> 
+    <!-- Divider -->
     <hr class="sidebar-divider ">
+<<<<<<< HEAD
         <div class="sidebar-heading">Barang</div>
         <li class="nav-item">
             <a class="nav-link" href="<?= base_url('barang'); ?>">
@@ -26,31 +27,44 @@
                 <i class="fas fa-sign-out-alt fa-fw"></i>
                 <span>Penyewaan</span></a>
         </li>
+=======
+    <div class="sidebar-heading">Barang</div>
+    <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('barang'); ?>">
+            <i class="fas fa-sign-out-alt fa-fw"></i>
+            <span>Data Barang</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('penyewaan'); ?>">
+            <i class="fas fa-sign-out-alt fa-fw"></i>
+            <span>Data Penyewaan</span></a>
+    </li>
+>>>>>>> 52fca6864215d18a753067763eb29a4a37151a6c
     <hr class="sidebar-divider ">
     <div class="sidebar-heading">User</div>
-        <!-- Nav Item - Logout -->
-        <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('user'); ?>">
-                <i class="fas fa-sign-out-alt fa-fw"></i>
-                <span>User Profile</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('user/edit'); ?>">
-                <i class="fas fa-sign-out-alt fa-fw"></i>
-                <span>Edit Profile</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('auth/logout'); ?>">
-                <i class="fas fa-sign-out-alt fa-fw"></i>
-                <span>Log Out</span></a>
-        </li>
 
-       
+    <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('user'); ?>">
+            <i class="fas fa-sign-out-alt fa-fw"></i>
+            <span>User Profile</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('user/edit'); ?>">
+            <i class="fas fa-sign-out-alt fa-fw"></i>
+            <span>Edit Profile</span></a>
+    </li>
+    <!-- Nav Item - Logout -->
+    <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('auth/logout'); ?>">
+            <i class="fas fa-sign-out-alt fa-fw"></i>
+            <span>Log Out</span></a>
+    </li>
 
-        <!-- Sidebar Toggler Sidebar -->
-        <div class="text-center d-none d-md-inline">
-            <button class="rounded-circle border-0" id="sidebarToggle"></button>
-        </div>
+
+    <!-- Sidebar Toggler Sidebar -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
 
 </ul>
 <!-- End of Sidebar -->

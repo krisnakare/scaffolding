@@ -10,8 +10,13 @@
             <?php endif; ?>
 
             <?php $this->session->flashdata('message'); ?>
+<<<<<<< HEAD
  
             <a href="#" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newPenyewaan">Add Penyewaan Baru</a>
+=======
+
+            <a href="<?= base_url('penyewaan/tambah_sewa'); ?>" class="btn btn-primary mb-3">Add Barang Baru</a>
+>>>>>>> 52fca6864215d18a753067763eb29a4a37151a6c
 
             <nav aria-label="Page navigation">
                 <ul class="pagination">
@@ -22,10 +27,17 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
+<<<<<<< HEAD
                         <th scope="col">nama_penyewa</th>
                         <th scope="col">tanggal_sewa</th>
                         <th scope="col">lama_sewa</th>
                             <th scope="col">Action</th>
+=======
+                        <th scope="col">Nama Penyewa</th>
+                        <th scope="col">Tgl Sewa</th>
+                        <th scope="col">Lama Sewa</th>
+                        <th scope="col">Action</th>
+>>>>>>> 52fca6864215d18a753067763eb29a4a37151a6c
                     </tr>
                 </thead>
                 <tbody>
@@ -33,19 +45,28 @@
                     <?php foreach ($penyewaan as $s) : ?>
                         <tr>
                             <th scope="row"><?= $i++; ?></th>
+<<<<<<< HEAD
                             <td><?= $s->nama_penyewa ?></td>
                             <td><?= $s->tgl_sewa ?></td>
                             <td><?= $s->lama_sewa ?></td>
                                 <td>
                                     <a href="<?= base_url('penyewaan/hapus_barang/') . $s->id_sewa ?>" class="badge badge-danger">delete</a>
                             </tb>
+=======
+                            <td><?= $p->nama_penyewa ?></td>
+                            <td><?= $p->tgl_sewa ?></td>
+                            <td><?= $p->lama_sewa ?></td>
+                            <td>
+                                <a href="<?= base_url('penyewaan/hapus_penyewaan/') . $p->id_sewa ?>" class="badge badge-danger">delete</a>
+                            </td>
+>>>>>>> 52fca6864215d18a753067763eb29a4a37151a6c
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
             <br>
-
         </div>
+<<<<<<< HEAD
     </div>
 
     <!-- Modal -->
@@ -77,4 +98,6 @@
                 </form>
             </div>
         </div>
+=======
+>>>>>>> 52fca6864215d18a753067763eb29a4a37151a6c
     </div>
