@@ -41,7 +41,7 @@
                 </tr>
                 <tr>
                     <td colspan="3"><b>Order Total: Rp <?php echo number_format($grand_total, 0, ",", "."); ?></b></td>
-                    <td colspan="4" align="right">
+                    <td colspan="4" allign="right">
                         <a data-toggle="modal" data-target="#myModal" class='btn btn-sm btn-danger' rel="noopener noreferrer">Kosongkan Cart</a>
                         <button class='btn btn-sm btn-success' type="submit">Update Cart</button>
                         <a href="<?php echo base_url() ?>shopping/check_out" class='btn btn-sm btn-primary'>Check Out</a>
