@@ -20,7 +20,7 @@
     <li class="nav-item">
         <a class="nav-link" href="<?= base_url('sewa'); ?>">
             <i class="fas fa-sign-out-alt fa-fw"></i>
-            <span>Data Penyewaan</span></a>
+            <span>Tambah Penyewaan</span></a>
     </li>
     <hr class="sidebar-divider ">
     <div class="sidebar-heading">User</div>
