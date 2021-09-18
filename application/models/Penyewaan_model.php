@@ -14,10 +14,16 @@ class Penyewaan_model extends CI_Model
         return $this->db->get('tabel_sewa')->result();
     }
 
-    public function hapus_penyewaan($id_sewa)
+    public function hapus_penyewaan($invoice_id)
     {
-        $this->db->where('id_sewa', $id_sewa);
+        $this->db->where('invoice_id', $invoice_id);
         $this->db->delete('tabel_sewa');
+    }
+
+    public function hapus_detail($invoice_id)
+    {
+        $this->db->where('invoice_id', $invoice_id);
+        $this->db->delete('detail_sewa');
     }
 
     public function getHargaSewa($id_barang)

@@ -28,7 +28,8 @@ class Penyewaan extends CI_Controller
 
     public function tambah_sewa()
     {
-            $invoice_id = htmlspecialchars($this->input->post('invoice_id'));
+            $invoice_id = date('y').date('m').date('d').date('h').date('i').date('s');
+
             $nama_penyewa = htmlspecialchars($this->input->post('nama_penyewa'));
             $tgl_sewa = htmlspecialchars($this->input->post('tgl_sewa'));
             $lama_sewa = htmlspecialchars($this->input->post('lama_sewa'));
@@ -42,6 +43,7 @@ class Penyewaan extends CI_Controller
                 'status' => $status
             );
             $this->db->insert('tabel_sewa', $data);
+            
             
             $id_barang = htmlspecialchars($this->input->post('id_barang'));
             $harga_sewa = $this->Penyewaan_model->getHargaSewa($id_barang);
@@ -62,9 +64,10 @@ class Penyewaan extends CI_Controller
         
     }
 
-    public function hapus_penyewaan($id_sewa)
+    public function hapus_penyewaan($invoice_id)
     {
-        $this->Penyewaan_model->hapus_penyewaan($id_sewa);
+        $this->Penyewaan_model->hapus_penyewaan($invoice_id);
+        $this->Penyewaan_model->hapus_detail($invoice_id);
         redirect('penyewaan');
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">

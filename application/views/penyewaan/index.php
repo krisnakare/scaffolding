@@ -37,7 +37,8 @@
                             <td><?= $p->tgl_sewa ?></td>
                             <td><?= $p->lama_sewa ?></td>
                             <td>
-                                <a href="<?= base_url('penyewaan/hapus_penyewaan/') . $p->id_sewa ?>" class="badge badge-danger">delete</a>
+                                <a href="<?= base_url('penyewaan/hapus_penyewaan/') . $p->invoice_id ?>" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                <a href="<?= base_url('penyewaan/pengembalian/') . $p->invoice_id ?>" class="btn btn-info"><i class="fas fa-undo"></i></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -55,10 +56,9 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="<?= base_url('Penyewaan/tambah_sewa'); ?>" method="post">
+                    <form action="<?= base_url('penyewaan/tambah_sewa'); ?>" method="post">
                         <div class="modal-body">
                             <div class="form-group">
-                                <input type="hidden" name="invoice_id" id="invoice_id">
                                 <label for="nama_penyewa">Nama Penyewa</label>
                                 <input type="text" class="form-control" id="nama_penyewa" name="nama_penyewa" placeholder="Nama Penyewa">
                             </div>
@@ -92,10 +92,3 @@
                 </div>
             </div>
         </div>
-
-        <script>
-            $('document').ready(function(){
-            let invoice_id = new Date().valueOf();
-            document.getElementById("invoice_id").value = invoice_id;
-            });
-        </script>
