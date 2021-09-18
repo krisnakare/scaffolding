@@ -9,14 +9,14 @@ foreach ($barang as $row) {
                     <h4 class="card-title">
                         <p><?php echo $row['nama_barang']; ?></p>
                     </h4>
-                    <h5>Rp. <?php echo number_format($row['harga_barang'], 0, ",", "."); ?></h5>
+                    <h5>Rp. <?php echo number_format($row['harga_sewa'], 0, ",", "."); ?></h5>
                 </div>
                 <div class="card-footer">
                     <input type="hidden" name="id_barang" value="<?php echo $row['id_barang']; ?>" />
                     <input type="hidden" name="nama_barang" value="<?php echo $row['nama_barang']; ?>" />
-                    <input type="hidden" name="harga_barang" value="<?php echo $row['harga_barang']; ?>" />
+                    <input type="hidden" name="harga_sewa" value="<?php echo $row['harga_sewa']; ?>" />
                     <input type="hidden" name="banyak_barang" value="1" />
-                    <button type="submit" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-shopping-cart"></i> Beli</button>
+                    <button type="submit" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-shopping-cart"></i> sewa</button>
                 </div>
             </form>
         </div>
