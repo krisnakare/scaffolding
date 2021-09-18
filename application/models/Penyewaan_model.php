@@ -19,4 +19,12 @@ class Penyewaan_model extends CI_Model
         $this->db->where('id_sewa', $id_sewa);
         $this->db->delete('tabel_sewa');
     }
+
+    public function getHargaSewa($id_barang)
+    {
+        $this->db->select('harga_sewa');
+        $this->db->where('id_barang', $id_barang);
+
+        return $this->db->get('barang')->row()->harga_sewa;
+    }
 }

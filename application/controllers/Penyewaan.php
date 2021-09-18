@@ -8,16 +8,15 @@ class Penyewaan extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->load->model('Penyewaan_model');
-        // $this->load->model('Barang_model');
-        // $this->form_validation();
+        $this->load->model('Barang_model');
     }
 
     public function index()
     {
         $data['title'] = 'Daftar Penyewaan';
         $data['user'] = $this->User_model->user();
-
         $data['penyewaan'] = $this->pagination();
+        $data['barang'] = $this->Barang_model->getBarang();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -29,66 +28,39 @@ class Penyewaan extends CI_Controller
 
     public function tambah_sewa()
     {
-        $this->form_validation->set_rules('nama_penyewa', 'Nama Penyewa', 'required');
-        if ($this->form_validation->run() == false) {
-            $data['title'] = 'Tambah Data Sewa';
-            $data['penyewaan'] = $this->Penyewaan_model->get();
-            $data['user'] = $this->User_model->user();
-            $data['barang'] = $this->db->get('barang')->result();
-
-            // $this->load->view('templates/header', $data);
-            // $this->load->view('templates/sidebar', $data);
-            // $this->load->view('templates/topbar', $data);
-            // $this->load->view('penyewaan/index', $data);
-            // $this->load->view('templates/footer');
-        } else {
+            $invoice_id = htmlspecialchars($this->input->post('invoice_id'));
             $nama_penyewa = htmlspecialchars($this->input->post('nama_penyewa'));
             $tgl_sewa = htmlspecialchars($this->input->post('tgl_sewa'));
             $lama_sewa = htmlspecialchars($this->input->post('lama_sewa'));
             $status = "pinjam";
 
             $data = array(
+                'invoice_id' => $invoice_id,
                 'nama_penyewa' => $nama_penyewa,
                 'tgl_sewa' => $tgl_sewa,
                 'lama_sewa' => $lama_sewa,
                 'status' => $status
             );
-
             $this->db->insert('tabel_sewa', $data);
+            
+            $id_barang = htmlspecialchars($this->input->post('id_barang'));
+            $harga_sewa = $this->Penyewaan_model->getHargaSewa($id_barang);
+            $banyak_barang = htmlspecialchars($this->input->post('banyak_barang'));
+            $total_biaya = $banyak_barang * $lama_sewa * $harga_sewa;
+
+            $data_detail = array(
+                'invoice_id' => $invoice_id,
+                'id_barang' => $id_barang,
+                'banyak_barang' => $banyak_barang,
+                'total_biaya' => $total_biaya
+            );
+            $this->db->insert('detail_sewa', $data_detail);
 
             redirect('penyewaan');
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
             New Item has been added!</div>');
-        }
+        
     }
-
-    // public function tambah_keranjang()
-    // {
-    //     $id_barang = $this->input->post('id_barang');
-    //     $barang = $this->db->get_where('barang', array('id_barang' => $id_barang));
-    //     $banyak_barang = intval($this->input->post('banyak_barang'));
-
-    //     $data = array(
-    //         'id_barang' => $id_barang,
-    //         'banyak_barang' => $banyak_barang,
-    //         'total_biaya' => $barang->harga_sewa * $banyak_barang    
-    //     );
-
-    //     $this->cart->insert($data);
-    //     echo $this->show_cart();
-    // }
-
-    // public function show_cart()
-    // {
-    //     $output = '';
-    //     $no = 0;
-    //     foreach ($this->cart->contents() as $items) {
-    //         $no++;
-    //         $output = '
-
-    //         ';
-    //     }
-    // }
 
     public function hapus_penyewaan($id_sewa)
     {
