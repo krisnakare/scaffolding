@@ -15,7 +15,8 @@
                 <div class="card-body">
                     <h5 class="card-title"><?= $user['name']; ?>
                     </h5>
-                    <p class="card-text"><?= $user['email']; ?></p>
+                    <p class="card-text"><?= $user['username']; ?></p>
+                    <p class="card-text"><?= $user['no_telp']; ?></p>
                 </div>
             </div>
         </div>

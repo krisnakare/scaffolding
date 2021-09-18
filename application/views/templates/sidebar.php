@@ -4,7 +4,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url(); ?>">
         <div class="sidebar-brand-icon">
-            <i class="fas fa-calendar-alt"></i>
+            <i class="fas fa-shopping-cart"></i>
         </div>
         <div class="sidebar-brand-text mx-3">Penyewaan Scaffolding</div>
     </a>
@@ -14,13 +14,13 @@
     <div class="sidebar-heading">Barang</div>
     <li class="nav-item">
         <a class="nav-link" href="<?= base_url('barang'); ?>">
-            <i class="fas fa-sign-out-alt fa-fw"></i>
+            <i class="fas fa-box fa-fw"></i>
             <span>Data Barang</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('sewa'); ?>">
+        <a class="nav-link" href="<?= base_url('penyewaan'); ?>">
             <i class="fas fa-sign-out-alt fa-fw"></i>
-            <span>Tambah Penyewaan</span></a>
+            <span>Data Penyewaan</span></a>
     </li>
     <hr class="sidebar-divider ">
     <div class="sidebar-heading">User</div>
