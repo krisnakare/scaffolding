@@ -25,6 +25,18 @@ class Pengembalian extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function add()
+    {
+        $data['title'] = 'Form Pengembalian';
+        $data['user'] = $this->User_model->user();
+        $data['barang'] = $this->Barang_model->getBarang();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('pengembalian/add', $data);
+        $this->load->view('templates/footer');
+    }
 
     public function tambah_sewa()
     {
