@@ -28,40 +28,46 @@ class Penyewaan extends CI_Controller
 
     public function tambah_sewa()
     {
-            $invoice_id = date('y').date('m').date('d').date('h').date('i').date('s');
+        $invoice_id = date('y') . date('m') . date('d') . date('h') . date('i') . date('s');
 
-            $nama_penyewa = htmlspecialchars($this->input->post('nama_penyewa'));
-            $tgl_sewa = htmlspecialchars($this->input->post('tgl_sewa'));
-            $lama_sewa = htmlspecialchars($this->input->post('lama_sewa'));
-            $status = "pinjam";
+        $nama_penyewa = htmlspecialchars($this->input->post('nama_penyewa'));
+        $tgl_sewa = htmlspecialchars($this->input->post('tgl_sewa'));
+        $tgl_pengembalian = htmlspecialchars($this->input->post('tgl_pengembalian'));
+        $status = "pinjam";
 
-            $data = array(
-                'invoice_id' => $invoice_id,
-                'nama_penyewa' => $nama_penyewa,
-                'tgl_sewa' => $tgl_sewa,
-                'lama_sewa' => $lama_sewa,
-                'status' => $status
-            );
-            $this->db->insert('tabel_sewa', $data);
-            
-            
-            $id_barang = htmlspecialchars($this->input->post('id_barang'));
-            $harga_sewa = $this->Penyewaan_model->getHargaSewa($id_barang);
-            $banyak_barang = htmlspecialchars($this->input->post('banyak_barang'));
-            $total_biaya = $banyak_barang * $lama_sewa * $harga_sewa;
+        $data = array(
+            'invoice_id' => $invoice_id,
+            'nama_penyewa' => $nama_penyewa,
+            'tgl_sewa' => $tgl_sewa,
+            'tgl_pengembalian' => $tgl_pengembalian,
+            'status' => $status
+        );
+        $this->db->insert('tabel_sewa', $data);
 
-            $data_detail = array(
-                'invoice_id' => $invoice_id,
-                'id_barang' => $id_barang,
-                'banyak_barang' => $banyak_barang,
-                'total_biaya' => $total_biaya
-            );
-            $this->db->insert('detail_sewa', $data_detail);
 
-            redirect('penyewaan');
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+        $id_barang = htmlspecialchars($this->input->post('id_barang'));
+        $harga_sewa = $this->Penyewaan_model->getHargaSewa($id_barang);
+        $banyak_barang = htmlspecialchars($this->input->post('banyak_barang'));
+
+        // hitung lama sewa
+        $date1 = new DateTime($tgl_sewa);
+        $date2 = new DateTime($tgl_pengembalian);
+        $interval = $date1->diff($date2);
+        $lama_sewa = $interval->d;
+
+        $total_biaya = $banyak_barang * $lama_sewa * $harga_sewa;
+
+        $data_detail = array(
+            'invoice_id' => $invoice_id,
+            'id_barang' => $id_barang,
+            'banyak_barang' => $banyak_barang,
+            'total_biaya' => $total_biaya
+        );
+        $this->db->insert('detail_sewa', $data_detail);
+
+        redirect('penyewaan');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
             New Item has been added!</div>');
-        
     }
 
     public function hapus_penyewaan($invoice_id)

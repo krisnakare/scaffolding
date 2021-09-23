@@ -11,8 +11,6 @@
 
             <?php $this->session->flashdata('message'); ?>
 
-            <a href="#" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newPenyewaan">Tambah Sewa</a>
-
             <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <?php echo $this->pagination->create_links(); ?>
@@ -24,7 +22,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Nama Penyewa</th>
                         <th scope="col">Tgl Sewa</th>
-                        <th scope="col">Tgl Pengembalian</th>
+                        <th scope="col">Lama Sewa</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -35,7 +33,7 @@
                             <th scope="row"><?= $i++; ?></th>
                             <td><?= $p->nama_penyewa ?></td>
                             <td><?= $p->tgl_sewa ?></td>
-                            <td><?= $p->tgl_pengembalian ?></td>
+                            <td><?= $p->lama_sewa ?></td>
                             <td>
                                 <a href="<?= base_url('penyewaan/hapus_penyewaan/') . $p->invoice_id ?>" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                                 <a href="<?= base_url('penyewaan/pengembalian/') . $p->invoice_id ?>" class="btn btn-info"><i class="fas fa-undo"></i></a>
@@ -67,8 +65,8 @@
                                 <input type="date" class="form-control" id="tgl_sewa" name="tgl_sewa" placeholder="Tanggal Sewa">
                             </div>
                             <div class="form-group">
-                                <label for="tgl_pengembalian">Tanggal Pengembalian</label>
-                                <input type="date" class="form-control" id="tgl_pengembalian" name="tgl_pengembalian">
+                                <label for="lama_sewa">Lama Sewa</label>
+                                <input type="text" class="form-control" id="lama_sewa" name="lama_sewa" placeholder="lama Sewa">
                             </div>
                             <div class="form-group">
                                 <label for="id_barang">Barang</label>
