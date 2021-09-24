@@ -20,20 +20,20 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Nama Penyewa</th>
-                        <th scope="col">Tgl Sewa</th>
-                        <th scope="col">Lama Sewa</th>
+                        <th scope="col">Id Pengembalian</th>
+                        <th scope="col">Invoice id</th>
+                        <th scope="col">Tanggal Pengembalian</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $i = $this->uri->segment('3') + 1; ?>
-                    <?php foreach ($penyewaan as $p) : ?>
+                    <?php foreach ($pengembalian as $k) : ?>
                         <tr>
                             <th scope="row"><?= $i++; ?></th>
-                            <td><?= $p->nama_penyewa ?></td>
-                            <td><?= $p->tgl_sewa ?></td>
-                            <td><?= $p->lama_sewa ?></td>
+                            <td><?= $k->id_pengembalian ?></td>
+                            <td><?= $k->invoice_id ?></td>
+                            <td><?= $k->tgl_pengembalian ?></td>
                             <td>
                                 <a href="<?= base_url('penyewaan/hapus_penyewaan/') . $p->invoice_id ?>" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                                 <a href="<?= base_url('penyewaan/pengembalian/') . $p->invoice_id ?>" class="btn btn-info"><i class="fas fa-undo"></i></a>
@@ -45,16 +45,16 @@
             <br>
         </div>
         <!-- Modal -->
-        <div class="modal fade" id="newPenyewaan" tabindex="-1" aria-labelledby="newPenyewaan" aria-hidden="true">
+        <div class="modal fade" id="newPengembalian" tabindex="-1" aria-labelledby="newPengembalian" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Add New penyewaan</h5>
+                        <h5 class="modal-title">Add Pengembalian</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="<?= base_url('penyewaan/tambah_sewa'); ?>" method="post">
+                    <form action="<?= base_url('pengembalian/add'); ?>" method="post">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="nama_penyewa">Nama Penyewa</label>

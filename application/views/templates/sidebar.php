@@ -22,17 +22,28 @@
 			<span>Daftar Barang</span></a>
 		</li>
 
-		<?php if ($title == "Daftar Penyewaan") : ?>
+	<hr class="sidebar-divider ">
+	<div class="sidebar-heading">Penyewaan dan Pengembalian</div>
+		<?php if ($title == "Penyewaan") : ?>
 			<li class="nav-item active">
 			<?php else : ?>
 			<li class="nav-item">
 			<?php endif; ?>
 			<a class="nav-link" href="<?= base_url('penyewaan'); ?>">
 				<i class="fas fa-sign-out-alt fa-fw"></i>
-				<span>Daftar Penyewaan</span></a>
+				<span>Penyewaan</span></a>
 			</li>
-			<hr class="sidebar-divider ">
-			<div class="sidebar-heading">User</div>
+		<?php if ($title == "Pengembalian") : ?>
+			<li class="nav-item active">
+			<?php else : ?>
+			<li class="nav-item">
+			<?php endif; ?>
+			<a class="nav-link" href="<?= base_url('pengembalian'); ?>">
+				<i class="fas fa-sign-out-alt fa-fw"></i>
+				<span>Pengembalian</span></a>
+			</li>
+	<hr class="sidebar-divider ">
+	<div class="sidebar-heading">User</div>
 
 			<li class="nav-item">
 				<a class="nav-link" href="<?= base_url('user'); ?>">
