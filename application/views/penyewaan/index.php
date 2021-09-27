@@ -22,6 +22,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">Invoice Id</th>
                         <th scope="col">Nama Penyewa</th>
                         <th scope="col">Tgl Sewa</th>
                         <th scope="col">Tgl Pengembalian</th>
@@ -33,6 +34,7 @@
                     <?php foreach ($penyewaan as $p) : ?>
                         <tr>
                             <th scope="row"><?= $i++; ?></th>
+                            <td><?= $p->invoice_id ?></td>
                             <td><?= $p->nama_penyewa ?></td>
                             <td><?= $p->tgl_sewa ?></td>
                             <td><?= $p->tgl_pengembalian ?></td>

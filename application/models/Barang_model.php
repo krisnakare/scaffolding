@@ -14,7 +14,6 @@ class Barang_model extends CI_Model
         $query = "SELECT * FROM barang
         WHERE id_barang = $id";
 
-        
         return $this->db->query($query)->row_array();
     }
 
@@ -40,7 +39,7 @@ class Barang_model extends CI_Model
             'harga_barang' => $harga_barang
         ];
 
-        $this->db->where('id_barang',$id_barang);
+        $this->db->where('id_barang', $id_barang);
         $this->db->update('barang', $data);
     }
 

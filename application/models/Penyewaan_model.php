@@ -14,6 +14,16 @@ class Penyewaan_model extends CI_Model
         return $this->db->get('tabel_sewa')->result();
     }
 
+    public function search($invoice_id)
+    {
+        $query = "SELECT * FROM tabel_sewa
+        INNER JOIN detail_sewa
+        ON tabel_sewa.invoice_id = detail_sewa.invoice_id
+        -- ON detail_sewa.id_barang = barang.id_barang
+        WHERE tabel_sewa.invoice_id = '$invoice_id'";
+        return $this->db->query($query)->row_array();
+    }
+
     public function hapus_penyewaan($invoice_id)
     {
         $this->db->where('invoice_id', $invoice_id);

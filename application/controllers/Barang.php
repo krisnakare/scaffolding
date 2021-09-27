@@ -8,7 +8,6 @@ class Barang extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->load->model('Barang_model');
-        
     }
 
     public function index()
@@ -23,6 +22,20 @@ class Barang extends CI_Controller
         $this->load->view('templates/topbar', $data);
         $this->load->view('barang/index', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function search()
+    {
+        $id_barang = $this->input->post('id_barang');
+        $barang = $this->Barang_model->search($id_barang);
+
+        if (!$barang) {
+            echo '<div class="alert alert-primary" role="alert">Invoice yang dicari tidak ada!</div>';
+        } else {
+            $data['barang'] = $barang;
+
+            $this->load->view('pengembalian/hasil', $data);
+        }
     }
 
 

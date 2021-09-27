@@ -38,42 +38,37 @@ class Pengembalian extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    // public function tambah_sewa()
-    // {
-    //     $invoice_id = date('y') . date('m') . date('d') . date('h') . date('i') . date('s');
+    public function tambah_pengembalian()
+    {
+        $invoice_id = $this->input->post('invoice_id');
+        $tgl_pengembalian = $this->input->post('tgl_pengembalian');
 
-    //     $nama_penyewa = htmlspecialchars($this->input->post('nama_penyewa'));
-    //     $tgl_sewa = htmlspecialchars($this->input->post('tgl_sewa'));
-    //     $lama_sewa = htmlspecialchars($this->input->post('lama_sewa'));
-    //     $status = "pinjam";
+        $data = array(
+            'invoice_id' => $invoice_id,
+            'tgl_pengembalian' => $tgl_pengembalian,
+        );
+        $this->db->insert('tabel_pengembalian', $data);
 
-    //     $data = array(
-    //         'invoice_id' => $invoice_id,
-    //         'nama_penyewa' => $nama_penyewa,
-    //         'tgl_sewa' => $tgl_sewa,
-    //         'lama_sewa' => $lama_sewa,
-    //         'status' => $status
-    //     );
-    //     $this->db->insert('tabel_sewa', $data);
+        $id_barang = $this->input->post('id_barang');
+        $telat_hari = $this->input->post('telat_hari');
+        //cek jika telat_hari lebih dari 0 hari (telat)
+        // maka cari harga per hari di tabel barang
+        $jumlah_barang = $this->input->post('jumlah_barang');
+        //cek barang yang kurang dari barang yang disewa berapa di tabel_sewa
+        //lalu cari harga barang dengan invoice id yang kurang itu
+        $biaya = 0;
+        // $biaya = ($telat_hari * biaya_telat_per_hari) + ($jumlah_barang_hilang * $harga_barang)
+        // untuk biaya yang perlu diquery adalah jumlah_barang_hilang dan harga_barang
 
-
-    //     $id_barang = htmlspecialchars($this->input->post('id_barang'));
-    //     $harga_sewa = $this->Pengembalian_model->getHargaSewa($id_barang);
-    //     $banyak_barang = htmlspecialchars($this->input->post('banyak_barang'));
-    //     $total_biaya = $banyak_barang * $lama_sewa * $harga_sewa;
-
-    //     $data_detail = array(
-    //         'invoice_id' => $invoice_id,
-    //         'id_barang' => $id_barang,
-    //         'banyak_barang' => $banyak_barang,
-    //         'total_biaya' => $total_biaya
-    //     );
-    //     $this->db->insert('detail_sewa', $data_detail);
-
-    //     redirect('pengembalian');
-    //     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-    //         New Item has been added!</div>');
-    // }
+        $data2 = array(
+            'invoice_id' => $invoice_id,
+            'id_barang' => $id_barang,
+            'telat_hari' => $telat_hari,
+            'jumlah_barang' => $jumlah_barang,
+            'biaya' => $biaya
+        );
+        $this->db->insert('detail_pengembalian', $data2);
+    }
 
     public function hapus_pengembalian($invoice_id)
     {

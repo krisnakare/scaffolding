@@ -25,6 +25,27 @@ class Penyewaan extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function search()
+    {
+        $invoice_id = $this->input->post('invoice_id');
+        $this->form_validation->set_rules('invoice_id', 'Invoice ID', 'trim|required');
+        $penyewaan = $this->Penyewaan_model->search($invoice_id);
+
+        if (!$penyewaan) {
+            echo '
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Tidak ada hasil. Mohon ulangi mengisi Invoice Id dengan benar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            ';
+        } else {
+            $data['penyewaan'] = $penyewaan;
+
+            $this->load->view('pengembalian/hasil', $data);
+        }
+    }
 
     public function tambah_sewa()
     {
