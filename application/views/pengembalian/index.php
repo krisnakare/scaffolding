@@ -1,8 +1,8 @@
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-10">
+            <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
             <?php if (validation_errors()) : ?>
                 <div class="alert alert-danger" role="alert">
                     <?= validation_errors(); ?>
@@ -10,6 +10,8 @@
             <?php endif; ?>
 
             <?php $this->session->flashdata('message'); ?>
+
+            <a href="<?= base_url('pengembalian/add'); ?>" class="btn btn-primary mb-3"><i class="fas fa-fw fa-plus"></i> Tambah Pengembalian</a>
 
             <nav aria-label="Page navigation">
                 <ul class="pagination">
@@ -35,7 +37,7 @@
                             <td><?= $k->invoice_id ?></td>
                             <td><?= $k->tgl_pengembalian ?></td>
                             <td>
-                                <a href="<?= base_url('pengembalian/hapus_pengembalian/') . $k->invoice_id ?>" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                <span onclick="deletePengembalian(<?= $k->invoice_id ?>)" class="btn btn-danger"><i class="fas fa-fw fa-trash"></i></span>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -90,3 +92,31 @@
             </div>
         </div>
     </div>
+    <script>
+        function deletePengembalian(invoice_id) {
+            Swal.fire({
+                title: 'Apakah anda yakin ingin menghapus data pengembalian ini?',
+                showDenyButton: true,
+                confirmButtonText: 'Hapus',
+                denyButtonText: `Batal`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    urlDeletePengembalian = `<?php echo base_url('pengembalian/hapus_pengembalian/` + invoice_id + `') ?>`;
+                    console.log(urlDeletePengembalian);
+                    $.ajax({
+                        url: urlDeletePengembalian,
+                        method: "DELETE",
+                        error: function() {
+                            console.log('failed delete');
+                        },
+                        success: function() {
+                            console.log('success delete');
+                        }
+                    });
+                    Swal.fire('Data pengembalian sudah terhapus!', '', 'success')
+                } else if (result.isDenied) {
+                    Swal.fire('Data pengembalian batal dihapus', '', 'error')
+                }
+            })
+        }
+    </script>

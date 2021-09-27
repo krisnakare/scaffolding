@@ -13,7 +13,7 @@ class Pengembalian extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'Daftar Pengembalian';
+        $data['title'] = 'Data Pengembalian';
         $data['user'] = $this->User_model->user();
         $data['pengembalian'] = $this->pagination();
         $data['barang'] = $this->Barang_model->getBarang();

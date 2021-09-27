@@ -12,7 +12,7 @@
 	<!-- Divider -->
 	<hr class="sidebar-divider ">
 	<div class="sidebar-heading">Barang</div>
-	<?php if ($title == "Daftar Barang") : ?>
+	<?php if ($title == "Data Barang") : ?>
 		<li class="nav-item active">
 		<?php else : ?>
 		<li class="nav-item">
@@ -24,7 +24,7 @@
 
 		<hr class="sidebar-divider ">
 		<div class="sidebar-heading">Penyewaan dan Pengembalian</div>
-		<?php if ($title == "Daftar Penyewaan") : ?>
+		<?php if ($title == "Data Penyewaan") : ?>
 			<li class="nav-item active">
 			<?php else : ?>
 			<li class="nav-item">
@@ -33,7 +33,7 @@
 				<i class="fas fa-book-open fa-fw"></i>
 				<span>Penyewaan</span></a>
 			</li>
-			<?php if ($title == "Daftar Pengembalian") : ?>
+			<?php if ($title == "Data Pengembalian") : ?>
 				<li class="nav-item active">
 				<?php else : ?>
 				<li class="nav-item">

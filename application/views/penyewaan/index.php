@@ -2,7 +2,7 @@
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-10">
             <?php if (validation_errors()) : ?>
                 <div class="alert alert-danger" role="alert">
                     <?= validation_errors(); ?>
@@ -11,7 +11,7 @@
 
             <?php $this->session->flashdata('message'); ?>
 
-            <a href="#" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newPenyewaan">Tambah Sewa</a>
+            <a href="#" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newPenyewaan"><i class="fas fa-fw fa-plus"></i> Tambah Sewa</a>
 
             <nav aria-label="Page navigation">
                 <ul class="pagination">
@@ -39,8 +39,7 @@
                             <td><?= $p->tgl_sewa ?></td>
                             <td><?= $p->tgl_pengembalian ?></td>
                             <td>
-                                <a href="<?= base_url('penyewaan/hapus_penyewaan/') . $p->invoice_id ?>" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                                <a href="<?= base_url('penyewaan/pengembalian/') . $p->invoice_id ?>" class="btn btn-info"><i class="fas fa-undo"></i></a>
+                                <span onclick="deletePenyewaan(<?= $p->invoice_id ?>)" class="btn btn-danger"><i class="fas fa-trash"></i></span>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -95,3 +94,31 @@
             </div>
         </div>
     </div>
+    <script>
+        function deletePenyewaan(invoice_id) {
+            Swal.fire({
+                title: 'Apakah anda yakin ingin menghapus data penyewaan ini?',
+                showDenyButton: true,
+                confirmButtonText: 'Hapus',
+                denyButtonText: `Batal`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    urldeletePenyewaan = `<?php echo base_url('penyewaan/hapus_penyewaan/` + invoice_id + `') ?>`;
+                    console.log(urldeletePenyewaan);
+                    $.ajax({
+                        url: urldeletePenyewaan,
+                        method: "DELETE",
+                        error: function() {
+                            console.log('failed delete');
+                        },
+                        success: function() {
+                            console.log('success delete');
+                        }
+                    });
+                    Swal.fire('Data penyewaan sudah terhapus!', '', 'success')
+                } else if (result.isDenied) {
+                    Swal.fire('Data penyewaan batal dihapus', '', 'error')
+                }
+            })
+        }
+    </script>

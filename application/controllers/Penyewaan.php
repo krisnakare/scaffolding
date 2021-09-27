@@ -13,7 +13,7 @@ class Penyewaan extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'Daftar Penyewaan';
+        $data['title'] = 'Data Penyewaan';
         $data['user'] = $this->User_model->user();
         $data['penyewaan'] = $this->pagination();
         $data['barang'] = $this->Barang_model->getBarang();
