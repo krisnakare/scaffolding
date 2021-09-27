@@ -50,24 +50,40 @@ class Pengembalian extends CI_Controller
         $this->db->insert('tabel_pengembalian', $data);
 
         $id_barang = $this->input->post('id_barang');
-        $telat_hari = $this->input->post('telat_hari');
-        //cek jika telat_hari lebih dari 0 hari (telat)
-        // maka cari harga per hari di tabel barang
-        $jumlah_barang = $this->input->post('jumlah_barang');
-        //cek barang yang kurang dari barang yang disewa berapa di tabel_sewa
-        //lalu cari harga barang dengan invoice id yang kurang itu
-        $biaya = 0;
-        // $biaya = ($telat_hari * biaya_telat_per_hari) + ($jumlah_barang_hilang * $harga_barang)
-        // untuk biaya yang perlu diquery adalah jumlah_barang_hilang dan harga_barang
+        $telat_hari = $this->input->post('telat_hari'); //banyak telat hari misal seharusnya tgl 27 tetapi dikembalikan tgl 29 maka telat hari adalah 2 hari
+        $biaya_telat = 0; //nilai default untuk biaya telat misal jika tidak telat maka tidak ada biaya tambahan
+        $biaya_hilang = 0; //nilai default untuk biaya barang hilang misal jika barang yang disewa kurang dari barang yang dikembalikan
+        if ($telat_hari > 0) { //jika lama sewa lebih dari 0 hari maka hitung biaya telat
+            $biaya_telat_per_hari = 5000; //!inget diganti untuk berapa biaya telat per harinya, tergantung pemilik
+            $biaya_telat = $telat_hari * $biaya_telat_per_hari; //perkalian dari banyak telat dan biaya telat per hari
+        }
+        $banyak_barang = $this->input->post('banyak_barang'); //banyak barang adalah banyak dari barang yang disewa (otomatis input ketika mencari dengan invoice_id)
+        $jumlah_barang = $this->input->post('jumlah_barang'); //jumlah barang yang akan dikembalikan, disini akan mengecek apakah kurang dari banyak barang yang disewa
+        $jumlah_barang_hilang = $banyak_barang - $jumlah_barang; //pengurangan banyak barang yang dipinjam dengan jumlah barang yang dikembalikan adalah nilai dari jumlah barang hilang
+
+        if ($jumlah_barang < $banyak_barang) { //cek barang yang kurang dari barang yang disewa berapa di tabel_sewa
+            //jika jumlah barang yang dikembalikan kurang dari jumlah barang yang dipinjam maka biaya harus ditambahkan dengan harga barangsssss
+            $harga_barang = $this->Barang_model->getBarangById($id_barang)['harga_barang']; //diambil jika barang ilang
+            $biaya_hilang = $harga_barang * $jumlah_barang_hilang;
+        }
+        $total_biaya = $biaya_telat + $biaya_hilang;
 
         $data2 = array(
             'invoice_id' => $invoice_id,
             'id_barang' => $id_barang,
             'telat_hari' => $telat_hari,
-            'jumlah_barang' => $jumlah_barang,
-            'biaya' => $biaya
+            'jumlah_barang' => $jumlah_barang_hilang,
+            'biaya' => $total_biaya
         );
+        echo json_encode($data2);
         $this->db->insert('detail_pengembalian', $data2);
+
+        $this->db
+            ->set('status')
+            ->where('invoice_id', $invoice_id)
+            ->update('tabel_sewa', array('status' => 'kembali')); //mengubah status jika barang sudah dikembalikan
+
+        redirect('pengembalian');
     }
 
     public function hapus_pengembalian($invoice_id)

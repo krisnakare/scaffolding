@@ -35,8 +35,7 @@
                             <td><?= $k->invoice_id ?></td>
                             <td><?= $k->tgl_pengembalian ?></td>
                             <td>
-                                <a href="<?= base_url('penyewaan/hapus_penyewaan/') . $p->invoice_id ?>" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                                <a href="<?= base_url('penyewaan/pengembalian/') . $p->invoice_id ?>" class="btn btn-info"><i class="fas fa-undo"></i></a>
+                                <a href="<?= base_url('pengembalian/hapus_pengembalian/') . $k->invoice_id ?>" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
