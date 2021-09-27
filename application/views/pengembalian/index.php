@@ -43,49 +43,50 @@
             </table>
             <br>
         </div>
-        <!-- Modal -->
-        <div class="modal fade" id="newPengembalian" tabindex="-1" aria-labelledby="newPengembalian" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Add Pengembalian</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="<?= base_url('pengembalian/add'); ?>" method="post">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="nama_penyewa">Nama Penyewa</label>
-                                <input type="text" class="form-control" id="nama_penyewa" name="nama_penyewa" placeholder="Nama Penyewa">
-                            </div>
-                            <div class="form-group">
-                                <label for="tgl_sewa">Tanggal Sewa</label>
-                                <input type="date" class="form-control" id="tgl_sewa" name="tgl_sewa" placeholder="Tanggal Sewa">
-                            </div>
-                            <div class="form-group">
-                                <label for="lama_sewa">Lama Sewa</label>
-                                <input type="text" class="form-control" id="lama_sewa" name="lama_sewa" placeholder="lama Sewa">
-                            </div>
-                            <div class="form-group">
-                                <label for="id_barang">Barang</label>
-                                <select name="id_barang" id="id_barang" class="form-control">
-                                    <option>Pilih Barang</option>
-                                    <?php foreach ($barang as $b) : ?>
-                                        <option value="<?= $b->id_barang ?>"><?= $b->nama_barang ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="banyak_barang">Banyak Barang</label>
-                                <input type="text" class="form-control" name="banyak_barang" id="banyak_barang">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Add</button>
-                        </div>
-                    </form>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="newPengembalian" tabindex="-1" aria-labelledby="newPengembalian" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Pengembalian</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+                <form action="<?= base_url('pengembalian/add'); ?>" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="nama_penyewa">Nama Penyewa</label>
+                            <input type="text" class="form-control" id="nama_penyewa" name="nama_penyewa" placeholder="Nama Penyewa">
+                        </div>
+                        <div class="form-group">
+                            <label for="tgl_sewa">Tanggal Sewa</label>
+                            <input type="date" class="form-control" id="tgl_sewa" name="tgl_sewa" placeholder="Tanggal Sewa">
+                        </div>
+                        <div class="form-group">
+                            <label for="lama_sewa">Lama Sewa</label>
+                            <input type="text" class="form-control" id="lama_sewa" name="lama_sewa" placeholder="lama Sewa">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_barang">Barang</label>
+                            <select name="id_barang" id="id_barang" class="form-control">
+                                <option>Pilih Barang</option>
+                                <?php foreach ($barang as $b) : ?>
+                                    <option value="<?= $b->id_barang ?>"><?= $b->nama_barang ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="banyak_barang">Banyak Barang</label>
+                            <input type="text" class="form-control" name="banyak_barang" id="banyak_barang">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>

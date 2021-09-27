@@ -1,5 +1,6 @@
-<form action="" method="post">
-    <div class="modal-body">
+<div class="col-lg-8">
+    <h3>Edit Data Barang</h3>
+    <form action="" method="post">
         <input type="hidden" name="id_barang" value="<?= (set_value('id_barang')) ? set_value('id_barang') : $barang['id_barang']; ?>">
         <div class="form-group">
             <label for="nama_barang">Nama Barang</label>
@@ -21,9 +22,8 @@
             <label for="harga_barang">Harga Barang</label>
             <input type="number" class="form-control" id="harga_barang" name="harga_barang" placeholder="Harga Barang" value="<?= (set_value('harga_barang')) ? set_value('harga_barang') : $barang['harga_barang']; ?>">
         </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Edit Barang</button>
-    </div>
-</form>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Edit Barang</button>
+        </div>
+    </form>
+</div>
