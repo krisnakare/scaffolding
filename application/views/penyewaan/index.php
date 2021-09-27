@@ -26,6 +26,7 @@
                         <th scope="col">Nama Penyewa</th>
                         <th scope="col">Tgl Sewa</th>
                         <th scope="col">Tgl Pengembalian</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -38,6 +39,7 @@
                             <td><?= $p->nama_penyewa ?></td>
                             <td><?= $p->tgl_sewa ?></td>
                             <td><?= $p->tgl_pengembalian ?></td>
+                            <td><?= $p->status ?></td>
                             <td>
                                 <span onclick="deletePenyewaan(<?= $p->invoice_id ?>)" class="btn btn-danger"><i class="fas fa-trash"></i></span>
                             </td>

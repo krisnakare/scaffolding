@@ -72,7 +72,8 @@ class Pengembalian extends CI_Controller
             'invoice_id' => $invoice_id,
             'id_barang' => $id_barang,
             'telat_hari' => $telat_hari,
-            'jumlah_barang' => $jumlah_barang_hilang,
+            'banyak_barang' => $jumlah_barang_hilang,
+            'jumlah_barang' => $jumlah_barang,
             'biaya' => $total_biaya
         );
         echo json_encode($data2);
