@@ -25,6 +25,7 @@
                         <th scope="col">Id Pengembalian</th>
                         <th scope="col">Invoice id</th>
                         <th scope="col">Tanggal Pengembalian</th>
+                        <th scope="col">Total Biaya</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -36,6 +37,7 @@
                             <td><?= $k->id_pengembalian ?></td>
                             <td><?= $k->invoice_id ?></td>
                             <td><?= $k->tgl_pengembalian ?></td>
+                            <td>Rp. <?= number_format($k->biaya) ?></td>
                             <td>
                                 <span onclick="deletePengembalian(<?= $k->invoice_id ?>)" class="btn btn-danger"><i class="fas fa-fw fa-trash"></i></span>
                             </td>
