@@ -37,8 +37,8 @@
                             <td><?= $b->nama_barang ?></td>
                             <td><?= $b->jenis_barang ?></td>
                             <td><?= $b->stok ?></td>
-                            <td><?= number_format($b->harga_sewa, 2) ?></td>
-                            <td><?= number_format($b->harga_barang, 2) ?></td>
+                            <td>Rp. <?= number_format($b->harga_sewa, 2) ?></td>
+                            <td>Rp. <?= number_format($b->harga_barang, 2) ?></td>
                             <td>
                                 <a href="<?= base_url('barang/update_barang/') . $b->id_barang ?>" class="btn btn-warning"><i class="fas fa-fw fa-edit"></i></a>
                                 <a href="<?= base_url('barang/hapus_barang/') . $b->id_barang ?>" class="btn btn-danger"><i class="fas fa-fw fa-trash"></i></a>
