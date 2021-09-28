@@ -40,7 +40,7 @@
                             <td><?= $p->nama_penyewa ?></td>
                             <td><?= $p->tgl_sewa ?></td>
                             <td><?= $p->tgl_pengembalian ?></td>
-                            <td>Rp. <?= number_format($p->total_biaya) ?></td>
+                            <td>Rp. <?= number_format($p->total_biaya, 2) ?></td>
                             <td><?= $p->status ?></td>
                             <td>
                                 <span onclick="deletePenyewaan(<?= $p->invoice_id ?>)" class="btn btn-danger"><i class="fas fa-trash"></i></span>

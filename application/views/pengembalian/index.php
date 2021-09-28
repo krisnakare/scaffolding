@@ -37,7 +37,7 @@
                             <td><?= $k->id_pengembalian ?></td>
                             <td><?= $k->invoice_id ?></td>
                             <td><?= $k->tgl_pengembalian ?></td>
-                            <td>Rp. <?= number_format($k->biaya) ?></td>
+                            <td>Rp. <?= number_format($k->biaya, 2) ?></td>
                             <td>
                                 <span onclick="deletePengembalian(<?= $k->invoice_id ?>)" class="btn btn-danger"><i class="fas fa-fw fa-trash"></i></span>
                             </td>
