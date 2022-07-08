@@ -66,23 +66,23 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="nama_barang">Nama Barang</label>
-                            <input type="text" class="form-control" id="nama_barang" name="nama_barang" placeholder="Nama barang">
+                            <input type="text" class="form-control" id="nama_barang" name="nama_barang" placeholder="Nama barang" required>
                         </div>
                         <div class="form-group">
                             <label for="jenis_barang">Jenis Barang</label>
-                            <input type="text" class="form-control" id="jenis_barang" name="jenis_barang" placeholder="Jenis Barang">
+                            <input type="text" class="form-control" id="jenis_barang" name="jenis_barang" placeholder="Jenis Barang" required>
                         </div>
                         <div class="form-group">
                             <label for="stok">Stok Barang</label>
-                            <input type="number" class="form-control" id="stok" name="stok" placeholder="stok">
+                            <input type="number" class="form-control" id="stok" name="stok" placeholder="stok" required>
                         </div>
                         <div class="form-group">
                             <label for="harga_sewa">Harga Sewa</label>
-                            <input type="number" class="form-control" id="harga_sewa" name="harga_sewa" placeholder="Harga Sewa">
+                            <input type="number" class="form-control" id="harga_sewa" name="harga_sewa" placeholder="Harga Sewa" required>
                         </div>
                         <div class="form-group">
                             <label for="harga_barang">Harga Barang</label>
-                            <input type="number" class="form-control" id="harga_barang" name="harga_barang" placeholder="Harga Barang">
+                            <input type="number" class="form-control" id="harga_barang" name="harga_barang" placeholder="Harga Barang" required>
                         </div>
                     </div>
                     <div class="modal-footer">

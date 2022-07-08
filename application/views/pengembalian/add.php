@@ -7,7 +7,7 @@
 			<div class="modal-body">
 				<div class="form-group">
 					<label for="invoice_id">Invoice Id</label>
-					<input type="text" class="form-control" id="invoice_id" name="invoice_id" placeholder="Invoice Id">
+					<input type="text" class="form-control" id="invoice_id" name="invoice_id" placeholder="Invoice Id" required>
 				</div>
 				<button id="btn" class="btn btn-info">Search</button>
 				<hr>

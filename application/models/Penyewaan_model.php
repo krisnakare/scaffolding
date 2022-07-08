@@ -41,7 +41,11 @@ class Penyewaan_model extends CI_Model
     {
         $this->db->select('harga_sewa');
         $this->db->where('id_barang', $id_barang);
+        
+        // $x = $this->db->get('barang')->row()->harga_sewa;
+        // var_dump($id_barang);
 
+        // return $x;
         return $this->db->get('barang')->row()->harga_sewa;
     }
 }

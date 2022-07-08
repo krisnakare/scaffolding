@@ -66,19 +66,19 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="nama_penyewa">Nama Penyewa</label>
-                            <input type="text" class="form-control" id="nama_penyewa" name="nama_penyewa" placeholder="Nama Penyewa">
+                            <input type="text" class="form-control" id="nama_penyewa" name="nama_penyewa" placeholder="Nama Penyewa" required>
                         </div>
                         <div class="form-group">
                             <label for="tgl_sewa">Tanggal Sewa</label>
-                            <input type="date" class="form-control" id="tgl_sewa" name="tgl_sewa" placeholder="Tanggal Sewa">
+                            <input type="date" class="form-control" id="tgl_sewa" name="tgl_sewa" placeholder="Tanggal Sewa" required>
                         </div>
                         <div class="form-group">
                             <label for="tgl_pengembalian">Tanggal Pengembalian</label>
-                            <input type="date" class="form-control" id="tgl_pengembalian" name="tgl_pengembalian">
+                            <input type="date" class="form-control" id="tgl_pengembalian" name="tgl_pengembalian" required>
                         </div>
                         <div class="form-group">
                             <label for="id_barang">Barang</label>
-                            <select name="id_barang" id="id_barang" class="form-control">
+                            <select name="id_barang" id="id_barang" class="form-control" required>
                                 <option>Pilih Barang</option>
                                 <?php foreach ($barang as $b) : ?>
                                     <option value="<?= $b->id_barang ?>"><?= $b->nama_barang ?></option>
@@ -87,7 +87,7 @@
                         </div>
                         <div class="form-group">
                             <label for="banyak_barang">Banyak Barang</label>
-                            <input type="text" class="form-control" name="banyak_barang" id="banyak_barang">
+                            <input type="text" class="form-control" name="banyak_barang" id="banyak_barang" required>
                         </div>
                     </div>
                     <div class="modal-footer">
