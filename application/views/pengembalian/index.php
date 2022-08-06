@@ -116,6 +116,7 @@
                         }
                     });
                     Swal.fire('Data pengembalian sudah terhapus!', '', 'success')
+                    setTimeout(function(){ window.location.href = ''; }, 2000);
                 } else if (result.isDenied) {
                     Swal.fire('Data pengembalian batal dihapus', '', 'error')
                 }

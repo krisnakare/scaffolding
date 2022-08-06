@@ -108,7 +108,6 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     urldeletePenyewaan = `<?php echo base_url('penyewaan/hapus_penyewaan/` + invoice_id + `') ?>`;
-                    console.log(urldeletePenyewaan);
                     $.ajax({
                         url: urldeletePenyewaan,
                         method: "DELETE",
@@ -120,6 +119,7 @@
                         }
                     });
                     Swal.fire('Data penyewaan sudah terhapus!', '', 'success')
+                    setTimeout(function(){ window.location.href = ''; }, 2000);
                 } else if (result.isDenied) {
                     Swal.fire('Data penyewaan batal dihapus', '', 'error')
                 }
