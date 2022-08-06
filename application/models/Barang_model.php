@@ -26,14 +26,12 @@ class Barang_model extends CI_Model
     {
         $id_barang = $this->input->post('id_barang');
         $nama_barang = $this->input->post('nama_barang');
-        $jenis_barang = $this->input->post('jenis_barang');
         $stok = $this->input->post('stok');
         $harga_sewa = $this->input->post('harga_sewa');
         $harga_barang = $this->input->post('harga_barang');
         $data = [
             'id_barang' => $id_barang,
             'nama_barang' => $nama_barang,
-            'jenis_barang' => $jenis_barang,
             'stok' => $stok,
             'harga_sewa' => $harga_sewa,
             'harga_barang' => $harga_barang

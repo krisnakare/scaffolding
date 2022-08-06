@@ -22,7 +22,6 @@
                     <tr>
                         <th scope="col">1</th>
                         <th scope="col">Nama Barang</th>
-                        <th scope="col">Jenis Barang</th>
                         <th scope="col">Stok</th>
                         <th scope="col">Harga Sewa</th>
                         <th scope="col">Harga Barang</th>
@@ -35,7 +34,6 @@
                         <tr>
                             <th scope="row"><?= $i++; ?></th>
                             <td><?= $b->nama_barang ?></td>
-                            <td><?= $b->jenis_barang ?></td>
                             <td><?= $b->stok ?></td>
                             <td>Rp. <?= number_format($b->harga_sewa, 2) ?></td>
                             <td>Rp. <?= number_format($b->harga_barang, 2) ?></td>
@@ -67,10 +65,6 @@
                         <div class="form-group">
                             <label for="nama_barang">Nama Barang</label>
                             <input type="text" class="form-control" id="nama_barang" name="nama_barang" placeholder="Nama barang" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="jenis_barang">Jenis Barang</label>
-                            <input type="text" class="form-control" id="jenis_barang" name="jenis_barang" placeholder="Jenis Barang" required>
                         </div>
                         <div class="form-group">
                             <label for="stok">Stok Barang</label>

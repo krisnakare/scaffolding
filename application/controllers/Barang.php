@@ -42,14 +42,12 @@ class Barang extends CI_Controller
     public function tambah_barang()
     {
         $nama_barang = htmlspecialchars($this->input->post('nama_barang'));
-        $jenis_barang = htmlspecialchars($this->input->post('jenis_barang'));
         $stok = htmlspecialchars($this->input->post('stok'));
         $harga_sewa = htmlspecialchars($this->input->post('harga_sewa'));
         $harga_barang = htmlspecialchars($this->input->post('harga_barang'));
 
         $data = array(
             'nama_barang' => $nama_barang,
-            'jenis_barang' => $jenis_barang,
             'stok' => $stok,
             'harga_sewa' => $harga_sewa,
             'harga_barang' => $harga_barang
@@ -74,7 +72,6 @@ class Barang extends CI_Controller
     public function update_barang($id)
     {
         $this->form_validation->set_rules('nama_barang', 'Nama barang', 'required');
-        $this->form_validation->set_rules('jenis_barang', 'jenis_barang', 'required');
         $this->form_validation->set_rules('stok', 'stok', 'required');
         $this->form_validation->set_rules('harga_sewa', 'harga_sewa', 'required');
         $this->form_validation->set_rules('harga_barang', 'harga_barang', 'required');

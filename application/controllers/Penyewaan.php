@@ -74,7 +74,7 @@ class Penyewaan extends CI_Controller
         $date1 = new DateTime($tgl_sewa);
         $date2 = new DateTime($tgl_pengembalian);
         $interval = $date1->diff($date2);
-        $lama_sewa = $interval->d;
+        $lama_sewa = $interval->m;
 
         $total_biaya = $banyak_barang * $lama_sewa * $harga_sewa;
 

@@ -7,10 +7,6 @@
             <input type="text" class="form-control" id="nama_barang" name="nama_barang" placeholder="Nama barang" value="<?= (set_value('nama_barang')) ? set_value('nama_barang') : $barang['nama_barang']; ?>" required>
         </div>
         <div class="form-group">
-            <label for="jenis_barang">Jenis Barang</label>
-            <input type="text" class="form-control" id="jenis_barang" name="jenis_barang" placeholder="Jenis Barang" value="<?= (set_value('jenis_barang')) ? set_value('jenis_barang') : $barang['jenis_barang']; ?>" required>
-        </div>
-        <div class="form-group">
             <label for="stok">Stok Barang</label>
             <input type="number" class="form-control" id="stok" name="stok" placeholder="stok" value="<?= (set_value('stok')) ? set_value('stok') : $barang['stok']; ?>" required>
         </div>
