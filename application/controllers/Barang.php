@@ -69,6 +69,33 @@ class Barang extends CI_Controller
         Barang has been deleted!</div>');
     }
 
+    public function stok()
+    {
+        $banyak_barang = $this->input->post('banyak_barang');
+        $id_barang = $this->input->post('id_barang');
+        $this->form_validation->set_rules('banyak_barang', 'Banyak Barang', 'trim|required');
+        $this->form_validation->set_rules('id_barang', 'ID Barang', 'trim|required');
+        $barang = $this->Barang_model->stok($id_barang, $banyak_barang);
+
+        if (!$barang) {
+            echo '
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Tidak ada hasil. Mohon ulangi mengisi Invoice Id dengan benar.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            ';
+        } else {
+            $decoded_stok = $barang['stok'];
+            if($banyak_barang <= $decoded_stok) {
+                die("masuk if bro");
+            } else {
+                die("masuk else bro");
+            }
+        }
+    }
+
     public function update_barang($id)
     {
         $this->form_validation->set_rules('nama_barang', 'Nama barang', 'required');

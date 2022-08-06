@@ -92,7 +92,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" disabled=disabled id="addButton" class="btn btn-primary">Add</button>
                     </div>
                 </form>
             </div>
@@ -125,4 +125,48 @@
                 }
             })
         }
+        $(function() {
+		$("#banyak_barang").keyup(function(event) {
+			event.preventDefault();
+            let id_barang = $("#id_barang").val();
+			let banyak_barang = $("#banyak_barang").val();
+            console.log(banyak_barang);
+			$.ajax({
+				type: "post",
+				url: "<?php echo base_url(); ?>barang/stok",
+				data: {
+                    id_barang: id_barang,
+					banyak_barang: banyak_barang
+				},
+				success: function(response) {
+					console.log("aselole");
+                    $("#addButton").removeAttr('disabled');
+				},
+				error: function() {
+					alert("Invalid!");
+				}
+			});
+		});
+
+        // $("#id_barang").change(function(event) {
+		// 	event.preventDefault();
+        //     let id_barang = $("#id_barang").val();
+		// 	let banyak_barang = $("#banyak_barang").val();
+        //     banyak_barang = null;
+        //     console.log(banyak_barang);
+		// 	$.ajax({
+		// 		type: "post",
+		// 		url: "<?php echo base_url(); ?>barang/stok",
+		// 		data: {
+		// 			banyak_barang: banyak_barang
+		// 		},
+		// 		success: function(response) {
+		// 			$("#hasil").html(response);
+		// 		},
+		// 		error: function() {
+		// 			alert("Invalid!");
+		// 		}
+		// 	});
+		// });
+	});
     </script>
