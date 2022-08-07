@@ -1,14 +1,3 @@
-<?php
-
-// var_dump($penyewaan);
-// $date1 = new DateTime($penyewaan['tgl_sewa']);
-// $date2 = new DateTime($penyewaan['tgl_pengembalian']);
-// $interval = $date1->diff($date2);
-// $lama_sewa = $interval->m;
-// $now = new DateTime(date('Y-m-d'));
-// $telat_hari = $date2->diff($now)->d;
-// jika barang kembali kurang dari $penyewaan['banyak_barang'] maka dikenakan biaya setiap barang yang kurang
-?>
 <table class="table table-borderless">
     <thead>
         <tr>
