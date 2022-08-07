@@ -9,7 +9,10 @@
                 </div>
             <?php endif; ?>
 
-            <?php $this->session->flashdata('message'); ?>
+            <?php $this->session->flashdata('message'); ?>  
+            <?php if(array_key_exists('message', $_SESSION)) {
+                echo $_SESSION['message'];
+            } ?>
 
             <a href="#" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newPenyewaan"><i class="fas fa-fw fa-plus"></i> Tambah Sewa</a>
 
@@ -92,7 +95,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" disabled=disabled id="addButton" class="btn btn-primary">Add</button>
+                        <button type="submit" id="addButton" class="btn btn-primary">Add</button>
                     </div>
                 </form>
             </div>
@@ -124,49 +127,5 @@
                     Swal.fire('Data penyewaan batal dihapus', '', 'error')
                 }
             })
-        }
-        $(function() {
-		$("#banyak_barang").keyup(function(event) {
-			event.preventDefault();
-            let id_barang = $("#id_barang").val();
-			let banyak_barang = $("#banyak_barang").val();
-            console.log(banyak_barang);
-			$.ajax({
-				type: "post",
-				url: "<?php echo base_url(); ?>barang/stok",
-				data: {
-                    id_barang: id_barang,
-					banyak_barang: banyak_barang
-				},
-				success: function(response) {
-					console.log("aselole");
-                    $("#addButton").removeAttr('disabled');
-				},
-				error: function() {
-					alert("Invalid!");
-				}
-			});
-		});
-
-        // $("#id_barang").change(function(event) {
-		// 	event.preventDefault();
-        //     let id_barang = $("#id_barang").val();
-		// 	let banyak_barang = $("#banyak_barang").val();
-        //     banyak_barang = null;
-        //     console.log(banyak_barang);
-		// 	$.ajax({
-		// 		type: "post",
-		// 		url: "<?php echo base_url(); ?>barang/stok",
-		// 		data: {
-		// 			banyak_barang: banyak_barang
-		// 		},
-		// 		success: function(response) {
-		// 			$("#hasil").html(response);
-		// 		},
-		// 		error: function() {
-		// 			alert("Invalid!");
-		// 		}
-		// 	});
-		// });
-	});
+        };
     </script>

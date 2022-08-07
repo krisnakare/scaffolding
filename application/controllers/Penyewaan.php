@@ -7,6 +7,7 @@ class Penyewaan extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
+        $this->load->library('session');
         $this->load->model('Penyewaan_model');
         $this->load->model('Barang_model');
     }
@@ -49,46 +50,54 @@ class Penyewaan extends CI_Controller
 
     public function tambah_sewa()
     {
-        $invoice_id = date('y') . date('m') . date('d') . date('h') . date('i') . date('s');
-
-        $nama_penyewa = htmlspecialchars($this->input->post('nama_penyewa'));
-        $tgl_sewa = htmlspecialchars($this->input->post('tgl_sewa'));
-        $tgl_pengembalian = htmlspecialchars($this->input->post('tgl_pengembalian'));
-        $status = "pinjam";
-
-        $data = array(
-            'invoice_id' => $invoice_id,
-            'nama_penyewa' => $nama_penyewa,
-            'tgl_sewa' => $tgl_sewa,
-            'tgl_pengembalian' => $tgl_pengembalian,
-            'status' => $status
-        );
-        $this->db->insert('tabel_sewa', $data);
-
-
         $id_barang = htmlspecialchars($this->input->post('id_barang'));
         $harga_sewa = $this->Penyewaan_model->getHargaSewa($id_barang);
         $banyak_barang = htmlspecialchars($this->input->post('banyak_barang'));
+        $stok_barang = $this->Barang_model->stok($id_barang)['stok'];
 
-        // hitung lama sewa
-        $date1 = new DateTime($tgl_sewa);
-        $date2 = new DateTime($tgl_pengembalian);
-        $interval = $date1->diff($date2);
-        $lama_sewa = $interval->m;
+        // Check stok barang terlebih dahulu, apabila banyak barang yang dipinjam lebih dari stok barang, maka jangan lakukan proses insert data
+        if($stok_barang >= $banyak_barang){
+            $invoice_id = date('y') . date('m') . date('d') . date('h') . date('i') . date('s');
 
-        $total_biaya = $banyak_barang * $lama_sewa * $harga_sewa;
+            $nama_penyewa = htmlspecialchars($this->input->post('nama_penyewa'));
+            $tgl_sewa = htmlspecialchars($this->input->post('tgl_sewa'));
+            $tgl_pengembalian = htmlspecialchars($this->input->post('tgl_pengembalian'));
+            $status = "pinjam";
+    
+            $data = array(
+                'invoice_id' => $invoice_id,
+                'nama_penyewa' => $nama_penyewa,
+                'tgl_sewa' => $tgl_sewa,
+                'tgl_pengembalian' => $tgl_pengembalian,
+                'status' => $status
+            );
+            $this->db->insert('tabel_sewa', $data);
 
-        $data_detail = array(
-            'invoice_id' => $invoice_id,
-            'id_barang' => $id_barang,
-            'banyak_barang' => $banyak_barang,
-            'total_biaya' => $total_biaya
-        );
-        $this->db->insert('detail_sewa', $data_detail);
+            // hitung lama sewa
+            $date1 = new DateTime($tgl_sewa);
+            $date2 = new DateTime($tgl_pengembalian);
+            $interval = $date1->diff($date2);
+            $lama_sewa = $interval->m;
 
-        redirect('penyewaan');
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            $total_biaya = $banyak_barang * $lama_sewa * $harga_sewa;
+
+            $data_detail = array(
+                'invoice_id' => $invoice_id,
+                'id_barang' => $id_barang,
+                'banyak_barang' => $banyak_barang,
+                'total_biaya' => $total_biaya
+            );
+            $this->db->insert('detail_sewa', $data_detail);
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
             New Item has been added!</div>');
+            redirect('penyewaan');
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">
+            Banyak barang yang disewa lebih dari stok yang ada!</div>');  
+            redirect('penyewaan');
+        }
+
     }
 
     public function hapus_penyewaan($invoice_id)

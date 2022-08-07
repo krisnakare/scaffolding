@@ -22,12 +22,12 @@ class Barang_model extends CI_Model
         return $this->db->get('barang')->result();
     }
 
-    public function stok($id_barang, $banyak_barang)
+    public function stok($id_barang)
     {
         // Check stok barang apakah jumlah barang yang akan diinputkan itu kurang dari stok barang, maka return true
         $query = "SELECT stok FROM barang
         WHERE barang.id_barang = '$id_barang'";
-        $results = $this->db->query($query)->row_array();
+        $results = $this->db->query($query)->row_array('stok');
         return $results;
     }
 
