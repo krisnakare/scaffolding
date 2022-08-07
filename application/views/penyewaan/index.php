@@ -21,7 +21,7 @@
                     <?php echo $this->pagination->create_links(); ?>
                 </ul>
             </nav>
-            <table class="table table-hover">
+            <table class="table table-hover" id="table_sewa">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -84,7 +84,9 @@
                             <select name="id_barang" id="id_barang" class="form-control" required>
                                 <option>Pilih Barang</option>
                                 <?php foreach ($barang as $b) : ?>
-                                    <option value="<?= $b->id_barang ?>"><?= $b->nama_barang ?></option>
+                                    <option value="<?= $b->id_barang ?>">
+                                    <?= $b->nama_barang ?> | stok: <?= $b->stok ?>
+                                </option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -128,4 +130,8 @@
                 }
             })
         };
+
+        $(document).ready( function () {
+            $('#table_sewa').DataTable();
+        });
     </script>
