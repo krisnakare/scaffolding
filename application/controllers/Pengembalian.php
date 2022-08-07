@@ -50,12 +50,12 @@ class Pengembalian extends CI_Controller
         $this->db->insert('tabel_pengembalian', $data);
 
         $id_barang = $this->input->post('id_barang');
-        $telat_hari = $this->input->post('telat_hari'); //banyak telat hari misal seharusnya tgl 27 tetapi dikembalikan tgl 29 maka telat hari adalah 2 hari
+        $telat_bulan = $this->input->post('telat_bulan'); //banyak telat hari misal seharusnya tgl 27 tetapi dikembalikan tgl 29 maka telat hari adalah 2 hari
         $biaya_telat = 0; //nilai default untuk biaya telat misal jika tidak telat maka tidak ada biaya tambahan
         $biaya_hilang = 0; //nilai default untuk biaya barang hilang misal jika barang yang disewa kurang dari barang yang dikembalikan
-        if ($telat_hari > 0) { //jika lama sewa lebih dari 0 hari maka hitung biaya telat
-            $biaya_telat_per_hari = 5000; //!inget diganti untuk berapa biaya telat per harinya, tergantung pemilik
-            $biaya_telat = $telat_hari * $biaya_telat_per_hari; //perkalian dari banyak telat dan biaya telat per hari
+        if ($telat_bulan > 0) { //jika lama sewa lebih dari 0 hari maka hitung biaya telat
+            $biaya_telat_per_bulan = 5000; //!inget diganti untuk berapa biaya telat per harinya, tergantung pemilik
+            $biaya_telat = $telat_bulan * $biaya_telat_per_bulan; //perkalian dari banyak telat dan biaya telat per hari
         }
         $banyak_barang = $this->input->post('banyak_barang'); //banyak barang adalah banyak dari barang yang disewa (otomatis input ketika mencari dengan invoice_id)
         $jumlah_barang = $this->input->post('jumlah_barang'); //jumlah barang yang akan dikembalikan, disini akan mengecek apakah kurang dari banyak barang yang disewa
@@ -71,7 +71,7 @@ class Pengembalian extends CI_Controller
         $data2 = array(
             'invoice_id' => $invoice_id,
             'id_barang' => $id_barang,
-            'telat_hari' => $telat_hari,
+            'telat_bulan' => $telat_bulan,
             'banyak_barang' => $jumlah_barang_hilang,
             'jumlah_barang' => $jumlah_barang,
             'biaya' => $total_biaya

@@ -1,12 +1,13 @@
 <?php
 
 // var_dump($penyewaan);
-$date1 = new DateTime($penyewaan['tgl_sewa']);
-$date2 = new DateTime($penyewaan['tgl_pengembalian']);
-$interval = $date1->diff($date2);
-$lama_sewa = $interval->d;
-$now = new DateTime(date('Y-m-d'));
-$telat_hari = $date2->diff($now)->d;
+$date1 = strtotime($penyewaan['tgl_sewa']);
+$date2 = strtotime($penyewaan['tgl_pengembalian']);
+$now = strtotime(date('Y-m-d'));
+$lama_nyewa = $date2 - $date1;
+$jarak_bulan = $now - $date1;
+$lama_sewa = round($lama_nyewa / 2628000);
+$telat_bulan = round($jarak_bulan / 2628000);
 // jika barang kembali kurang dari $penyewaan['banyak_barang'] maka dikenakan biaya setiap barang yang kurang
 ?>
 <table class="table table-borderless">
@@ -19,11 +20,11 @@ $telat_hari = $date2->diff($now)->d;
     <tbody>
         <tr>
             <td><?php echo $penyewaan['tgl_sewa'] ?></td>
-            <td><?php echo $lama_sewa ?> hari</td>
+            <td><?php echo $lama_sewa ?> bulan</td>
         </tr>
     </tbody>
 </table>
-<input type="hidden" name="telat_hari" id="telat_hari" value="<?= $telat_hari; ?>">
+<input type="hidden" name="telat_bulan" id="telat_bulan" value="<?= $telat_bulan; ?>">
 <div class="form-group">
     <label for="id_barang">ID Barang</label>
     <input type="text" class="form-control" name="id_barang" id="id_barang" onload="getBarang" value="<?php echo $penyewaan['id_barang'] ?>">
