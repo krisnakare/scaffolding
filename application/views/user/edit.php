@@ -5,6 +5,7 @@
     <div class="row">
         <div class="col-lg-8">
             <?php echo form_open_multipart('user/edit'); ?>
+            <input type="hidden" name="username" value="<?= $user['username']; ?>">
             <div class="form-group row">
                 <label for="name" class="col-sm-2 col-form-label">Full Name</label>
                 <div class="col-sm-10">
