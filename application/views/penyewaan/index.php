@@ -130,8 +130,4 @@
                 }
             })
         };
-
-        $(document).ready( function () {
-            $('#table_sewa').DataTable();
-        });
     </script>
