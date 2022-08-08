@@ -76,14 +76,12 @@ class Pengembalian extends CI_Controller
             'jumlah_barang' => $jumlah_barang,
             'biaya' => $total_biaya
         );
-        echo json_encode($data2);
         $this->db->insert('detail_pengembalian', $data2);
 
         $this->db
             ->set('status')
             ->where('invoice_id', $invoice_id)
             ->update('tabel_sewa', array('status' => 'kembali')); //mengubah status jika barang sudah dikembalikan
-
         redirect('pengembalian');
     }
 

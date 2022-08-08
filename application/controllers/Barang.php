@@ -78,17 +78,6 @@ class Barang extends CI_Controller
         $barang = $this->Barang_model->stok($id_barang, $banyak_barang);
 
         return $barang;
-
-        // if (!$barang) {
-
-        // } else {
-        //     $decoded_stok = $barang['stok'];
-        //     if($banyak_barang <= $decoded_stok) {
-        //         die("masuk if bro");
-        //     } else {
-        //         die("masuk else bro");
-        //     }
-        // }
     }
 
     public function update_barang($id)
@@ -101,8 +90,6 @@ class Barang extends CI_Controller
             $data['title'] = "Edit Data Barang";
             $data['user'] = $this->User_model->user();
             $data['barang'] = $this->Barang_model->getBarangById($id);
-
-            //$data['barang'] = $this->Barang_model->getJurusan();
 
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar');

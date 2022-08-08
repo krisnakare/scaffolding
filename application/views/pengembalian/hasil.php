@@ -1,12 +1,11 @@
 <?php
 
-// var_dump($penyewaan);
 $date1 = strtotime($penyewaan['tgl_sewa']);
 $date2 = strtotime($penyewaan['tgl_pengembalian']);
 $now = strtotime(date('Y-m-d'));
-$lama_nyewa = $date2 - $date1;
+$interval = $date2 - $date1;
 $jarak_bulan = $now - $date1;
-$lama_sewa = round($lama_nyewa / 2628000);
+$lama_sewa = round($interval / 2628000);
 $telat_bulan = round($jarak_bulan / 2628000);
 // jika barang kembali kurang dari $penyewaan['banyak_barang'] maka dikenakan biaya setiap barang yang kurang
 ?>

@@ -74,10 +74,10 @@ class Penyewaan extends CI_Controller
             $this->db->insert('tabel_sewa', $data);
 
             // hitung lama sewa
-            $date1 = new DateTime($tgl_sewa);
-            $date2 = new DateTime($tgl_pengembalian);
-            $interval = $date1->diff($date2);
-            $lama_sewa = $interval->m;
+            $date1 = strtotime($tgl_sewa);
+            $date2 = strtotime($tgl_pengembalian);
+            $interval = $date2 - $date1;
+            $lama_sewa = round($interval / 2628000);
 
             $total_biaya = $banyak_barang * $lama_sewa * $harga_sewa;
 
@@ -97,7 +97,6 @@ class Penyewaan extends CI_Controller
             Banyak barang yang disewa lebih dari stok yang ada!</div>');  
             redirect('penyewaan');
         }
-
     }
 
     public function hapus_penyewaan($invoice_id)
@@ -109,7 +108,6 @@ class Penyewaan extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
         Data Penyewaan has been deleted!</div>');
     }
-
 
     private function pagination()
     {
