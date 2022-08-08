@@ -41,8 +41,17 @@
 				<a class="nav-link" href="<?= base_url('pengembalian'); ?>">
 					<i class="fas fa-book fa-fw"></i>
 					<span>Pengembalian</span></a>
-				</li>
-				<hr class="sidebar-divider ">
+			</li>
+			<?php if ($title == "Laporan") : ?>
+				<li class="nav-item active">
+				<?php else : ?>
+				<li class="nav-item">
+				<?php endif; ?>
+				<a class="nav-link" href="<?= base_url('laporan'); ?>">
+				<i class="fa fa-archive" aria-hidden="true"></i>
+					<span>Laporan</span></a>
+			</li>
+		<hr class="sidebar-divider ">
 				<!-- Nav Item User Configuration -->
 				<div class="sidebar-heading">User</div>
 				<?php if ($title == "My Profile") : ?>
