@@ -16,8 +16,6 @@ class Laporan extends CI_Controller
         $data['user'] = $this->User_model->user();
         $data['laporan'] = $this->pagination();
 
-        
-
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -52,5 +50,17 @@ class Laporan extends CI_Controller
         $from = $this->uri->segment(3);
         $this->pagination->initialize($config);
         return $this->Laporan_model->data($config['per_page'], $from);
+    }
+
+    public function filter()
+    {
+        $month = $this->input->post('month');
+        $laporan = $this->Laporan_model->filterByMonth($month);
+        if(!$laporan) {
+            echo '<div class="alert alert-danger" role="alert">Data bulan yang dicari tidak ada!</div>';
+        } else {
+            $data['laporan'] = $laporan;
+            $this->load->view('laporan/hasil', $data);
+        }
     }
 }

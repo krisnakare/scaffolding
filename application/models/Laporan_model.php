@@ -11,18 +11,13 @@ class Laporan_model extends CI_Model
         return $this->db->get('tabel_sewa', $number, $offset)->result();
     }
 
-    public function getLaporan()
+    public function filterByMonth($month)
     {
-        $query = "SELECT 
-        tabel_sewa.invoice_id, nama_penyewa, tgl_sewa, tgl_pengembalian, total_biaya, jumlah_barang, biaya, status
-        FROM tabel_sewa
-        INNER JOIN detail_sewa
-        ON tabel_sewa.invoice_id = detail_sewa.invoice_id
-        INNER JOIN detail_pengembalian
-        ON detail_pengembalian.invoice_id = detail_sewa.invoice_id
-        -- ON detail_sewa.id_barang = barang.id_barang
-        WHERE tabel_sewa.invoice_id = '$invoice_id'";
-        return $this->db->query($query)->row_array();
+        $this->db->join('detail_pengembalian', 'detail_pengembalian.invoice_id = tabel_sewa.invoice_id');
+        $this->db->join('detail_sewa', 'detail_sewa.invoice_id = tabel_sewa.invoice_id');
+        $this->db->where('month(tabel_sewa.tgl_sewa)', $month);
+        $results = $this->db->get('tabel_sewa')->result();
+        return $results;
     }
 
 }
