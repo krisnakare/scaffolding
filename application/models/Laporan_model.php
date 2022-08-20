@@ -18,11 +18,12 @@ class Laporan_model extends CI_Model
         return $this->db->get('tabel_sewa')->result();
     }
 
-    public function filterByMonth($month)
+    public function filterByTime($month, $year)
     {
         $this->db->join('detail_pengembalian', 'detail_pengembalian.invoice_id = tabel_sewa.invoice_id');
         $this->db->join('detail_sewa', 'detail_sewa.invoice_id = tabel_sewa.invoice_id');
         $this->db->where('month(tabel_sewa.tgl_sewa)', $month);
+        $this->db->where('year(tabel_sewa.tgl_sewa)', $year);
         $results = $this->db->get('tabel_sewa')->result();
         return $results;
     }

@@ -1,5 +1,8 @@
 <?php
 $listBulan = [];
+$listTahun = [];
+$bulan = array (1=>'Januari',2=>'Februari',3=>'Maret',4=>'April',5=>'Mei',6=>'Juni',7=>'Juli',8=>'Agustus',9=>'September',10=>'Oktober',11=>'November',12=>'Desember');
+
 foreach ($all_laporan as $report => $value) {
     $timeString = strtotime($value->tgl_sewa);
     $date = getdate($timeString);
@@ -8,14 +11,23 @@ foreach ($all_laporan as $report => $value) {
         array_push($listBulan, $month);
     }
 }
-sort($listBulan);
-$bulan = array (1=>'Januari',2=>'Februari',3=>'Maret',4=>'April',5=>'Mei',6=>'Juni',7=>'Juli',8=>'Agustus',9=>'September',10=>'Oktober',11=>'November',12=>'Desember');
 
+foreach ($all_laporan as $report => $value) {
+    $timeString = strtotime($value->tgl_sewa);
+    $date = getdate($timeString);
+    $year = $date["year"];
+    if(!in_array($year, $listTahun, true)) {
+        array_push($listTahun, $year);
+    }
+}
+
+sort($listBulan);
+sort($listTahun);
 ?>
 <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
-    <form>
+    <div class="col-lg-4 col-md-6">
         <h5>Filter Laporan Penyewaan</h5>
         <div class="form-group">
             <label for="filter_bulan">Bulan</label>
@@ -24,9 +36,19 @@ $bulan = array (1=>'Januari',2=>'Februari',3=>'Maret',4=>'April',5=>'Mei',6=>'Ju
                 <?php foreach ($listBulan as $key => $value) :?>
                     <option value="<?= $value ?>"><?= $bulan[$value]; ?></option>
                 <?php endforeach; ?>
-        </select>
+            </select>
         </div>
-    </form>
+        <div class="form-group">
+            <label for="filter_tahun">Tahun</label>
+            <select class="form-control" id="filter_tahun">
+                <option value="">Pilih Tahun</option>
+                <?php foreach ($listTahun as $key => $value) :?>
+                    <option value="<?= $value ?>"><?= $value ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <button id="submit_filter" class="btn btn-primary">Filter</button>
+    </div>
 
     <div class="row">
         <div class="col-lg-12 p-4">
@@ -82,14 +104,55 @@ $bulan = array (1=>'Januari',2=>'Februari',3=>'Maret',4=>'April',5=>'Mei',6=>'Ju
         </div>
     </div>
     <script>
-        $('#filter_bulan').on('click', function() {
-            const month = this.value;
-            if(month){
+        // $('#filter_bulan').on('click', function() {
+        //     const month = this.value;
+        //     if(month){
+        //         console.log(month);
+        //         $.ajax({
+        //             type: "post",
+        //             url: "<?php echo base_url(); ?>laporan/filter",
+        //             data: {
+        //                 month: month
+        //             },
+        //             success: function(response) {
+        //                 $("#table_sewa").html(response);
+        //             },
+        //             error: function(error) {
+        //                 console.error("ERROR", error);
+        //             }
+        //         });
+        //     }
+        // });
+        // $('#filter_tahun').on('click', function() {
+        //     const year = this.value;
+        //     if(year){
+        //         $.ajax({
+        //             type: "post",
+        //             url: "<?php echo base_url(); ?>laporan/filter",
+        //             data: {
+        //                 year: year
+        //             },
+        //             success: function(response) {
+        //                 $("#table_sewa").html(response);
+        //             },
+        //             error: function(error) {
+        //                 console.error("ERROR", error);
+        //             }
+        //         });
+        //     }
+        // });
+
+        $('#submit_filter').on('click', function(){
+            const month = $('#filter_bulan').val();
+            const year = $('#filter_tahun').val();
+
+            if(month && year) {
                 $.ajax({
                     type: "post",
                     url: "<?php echo base_url(); ?>laporan/filter",
                     data: {
-                        month: month
+                        month: month,
+                        year: year
                     },
                     success: function(response) {
                         $("#table_sewa").html(response);
@@ -99,5 +162,5 @@ $bulan = array (1=>'Januari',2=>'Februari',3=>'Maret',4=>'April',5=>'Mei',6=>'Ju
                     }
                 });
             }
-        });
+        })
     </script>

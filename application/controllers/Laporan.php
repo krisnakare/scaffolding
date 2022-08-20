@@ -56,9 +56,10 @@ class Laporan extends CI_Controller
     public function filter()
     {
         $month = $this->input->post('month');
-        $laporan = $this->Laporan_model->filterByMonth($month);
+        $year = $this->input->post('year');
+        $laporan = $this->Laporan_model->filterByTime($month, $year);
         if(!$laporan) {
-            echo '<div class="alert alert-danger" role="alert">Data bulan yang dicari tidak ada!</div>';
+            echo '<div class="alert alert-danger" role="alert">Data waktu yang dicari tidak ada!</div>';
         } else {
             $data['laporan'] = $laporan;
             $this->load->view('laporan/hasil', $data);
