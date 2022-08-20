@@ -26,11 +26,11 @@ $telat_bulan = round($jarak_bulan / 2628000);
 <input type="hidden" name="telat_bulan" id="telat_bulan" value="<?= $telat_bulan; ?>">
 <div class="form-group">
     <label for="id_barang">ID Barang</label>
-    <input type="text" class="form-control" name="id_barang" id="id_barang" onload="getBarang" value="<?php echo $penyewaan['id_barang'] ?>">
+    <input type="text" class="form-control" name="id_barang" id="id_barang" onload="getBarang" value="<?php echo $penyewaan['id_barang'] ?>" readonly>
 </div>
 <div class="form-group">
     <label for="banyak_barang">Jumlah Barang</label>
-    <input type="text" class="form-control" name="banyak_barang" id="banyak_barang" value="<?php echo $penyewaan['banyak_barang'] ?>">
+    <input type="text" class="form-control" name="banyak_barang" id="banyak_barang" value="<?php echo $penyewaan['banyak_barang'] ?>" readonly>
 </div>
 <script>
     function getBarang() {
