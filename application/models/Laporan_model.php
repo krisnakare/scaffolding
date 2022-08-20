@@ -11,6 +11,13 @@ class Laporan_model extends CI_Model
         return $this->db->get('tabel_sewa', $number, $offset)->result();
     }
 
+    public function getAllLaporan()
+    {
+        $this->db->join('detail_pengembalian', 'detail_pengembalian.invoice_id = tabel_sewa.invoice_id');
+        $this->db->join('detail_sewa', 'detail_sewa.invoice_id = tabel_sewa.invoice_id');
+        return $this->db->get('tabel_sewa')->result();
+    }
+
     public function filterByMonth($month)
     {
         $this->db->join('detail_pengembalian', 'detail_pengembalian.invoice_id = tabel_sewa.invoice_id');

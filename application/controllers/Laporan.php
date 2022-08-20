@@ -15,6 +15,7 @@ class Laporan extends CI_Controller
         $data['title'] = 'Laporan';
         $data['user'] = $this->User_model->user();
         $data['laporan'] = $this->pagination();
+        $data['all_laporan'] = $this->Laporan_model->getAllLaporan();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);

@@ -1,22 +1,29 @@
-    <!-- Page Heading -->
+<?php
+$listBulan = [];
+foreach ($all_laporan as $report => $value) {
+    $timeString = strtotime($value->tgl_sewa);
+    $date = getdate($timeString);
+    $month = $date["mon"];
+    if(!in_array($month, $listBulan, true)) {
+        array_push($listBulan, $month);
+    }
+}
+sort($listBulan);
+$bulan = array (1=>'Januari',2=>'Februari',3=>'Maret',4=>'April',5=>'Mei',6=>'Juni',7=>'Juli',8=>'Agustus',9=>'September',10=>'Oktober',11=>'November',12=>'Desember');
+
+?>
+<!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
     <form>
+        <h5>Filter Laporan Penyewaan</h5>
         <div class="form-group">
-            <label for="filter_sewa">Filter Penyewaan per Bulan</label>
-            <select class="form-control" id="filter_sewa">
-                <option value="1">Januari</option>
-                <option value="2">Februari</option>
-                <option value="3">Maret</option>
-                <option value="4">April</option>
-                <option value="5">Mei</option>
-                <option value="6">Juni</option>
-                <option value="7">Juli</option>
-                <option value="8">Agustus</option>
-                <option value="9">September</option>
-                <option value="10">Oktober</option> 
-                <option value="11">November</option> 
-                <option value="12">Desember</option> 
+            <label for="filter_bulan">Bulan</label>
+            <select class="form-control" id="filter_bulan">
+                <option value="">Pilih Bulan</option>
+                <?php foreach ($listBulan as $key => $value) :?>
+                    <option value="<?= $value ?>"><?= $bulan[$value]; ?></option>
+                <?php endforeach; ?>
         </select>
         </div>
     </form>
@@ -75,20 +82,22 @@
         </div>
     </div>
     <script>
-        $('#filter_sewa').on('click', function() {
+        $('#filter_bulan').on('click', function() {
             const month = this.value;
-            $.ajax({
-                type: "post",
-                url: "<?php echo base_url(); ?>laporan/filter",
-                data: {
-                    month: month
-                },
-                success: function(response) {
-                    $("#table_sewa").html(response);
-                },
-                error: function(error) {
-                    console.error("ERROR", error);
-                }
-            });
+            if(month){
+                $.ajax({
+                    type: "post",
+                    url: "<?php echo base_url(); ?>laporan/filter",
+                    data: {
+                        month: month
+                    },
+                    success: function(response) {
+                        $("#table_sewa").html(response);
+                    },
+                    error: function(error) {
+                        console.error("ERROR", error);
+                    }
+                });
+            }
         });
     </script>
